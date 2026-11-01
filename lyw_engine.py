@@ -66,6 +66,8 @@ def build_lyw_data() -> dict:
 
     # Build 29-year archive table
     archive = []
+    strat_wealth = 10000.0
+    spy_wealth = 10000.0
     for _, row in holdings_df.iterrows():
         y = int(row["year"])
         t = str(row["display_ticker"])
@@ -78,6 +80,9 @@ def build_lyw_data() -> dict:
         ann_row = annual_df[annual_df["year"] == y]
         spy_ret = round(float(ann_row["benchmark_return"].iloc[0]) * 100.0, 2) if not ann_row.empty else 0.0
         beat = leg_ret > spy_ret
+
+        strat_wealth *= (1.0 + leg_ret / 100.0)
+        spy_wealth *= (1.0 + spy_ret / 100.0)
 
         archive.append({
             "year": y,
@@ -92,6 +97,8 @@ def build_lyw_data() -> dict:
             "stopDate": stop_d,
             "entryPrice": round(float(row["entry_price"]), 2) if pd.notna(row.get("entry_price")) else None,
             "exitPrice": round(float(row["exit_price"]), 2) if pd.notna(row.get("exit_price")) else None,
+            "wealth": round(strat_wealth),
+            "benchmarkWealth": round(spy_wealth),
         })
 
     # Live 2026 holding: SNDK

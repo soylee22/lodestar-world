@@ -85,15 +85,21 @@ def build_dotcom_data() -> dict:
     ann_core = ((1.0 + s_core / 100.0).groupby(s_core.index.year).prod() - 1.0) * 100.0
 
     years_list = []
+    lode_wealth = 10000.0
+    bench_wealth = 10000.0
     for y in sorted(ann_strat.index):
         r_strat = round(float(ann_strat[y]), 2)
         r_core = round(float(ann_core.get(y, 0.0)), 2)
+        lode_wealth *= (1.0 + r_strat / 100.0)
+        bench_wealth *= (1.0 + r_core / 100.0)
         years_list.append({
             "year": int(y),
             "strategy": r_strat,
             "benchmark": r_core,
             "excess": round(r_strat - r_core, 2),
             "beat": r_strat > r_core,
+            "wealth": round(lode_wealth),
+            "benchmarkWealth": round(bench_wealth),
         })
 
     def calc_stats(series: pd.Series) -> dict:
