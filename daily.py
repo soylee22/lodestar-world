@@ -187,6 +187,20 @@ def main():
     (DATA / "daily_signal.json").write_text(json.dumps(daily_payload, indent=2))
     print(f"Saved daily monitor state to {DATA / 'daily_signal.json'}")
 
+    # Rebuild data.js with fresh figures
+    import subprocess
+    print("\nRebuilding data.js with latest signals...")
+    subprocess.run([sys.executable, str(HERE / "build_data.py")], check=True)
+
+    # Sync to Atlas if present
+    sync_script = HERE / "sync_to_atlas.py"
+    if sync_script.is_file():
+        try:
+            print("Syncing updated files to Atlas screener...")
+            subprocess.run([sys.executable, str(sync_script)], check=True)
+        except Exception as e:
+            print(f"Atlas sync notice: {e}")
+
 
 if __name__ == "__main__":
     main()

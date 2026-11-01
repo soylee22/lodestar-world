@@ -1,12 +1,13 @@
-name: Daily read
+name: Daily read and drumbeat
 
 on:
   schedule:
-    # 07:00 UTC on weekdays. An hour after the monthly job, so on the 1st the
-    # new signal is already recorded before the daily read describes it.
-    # Weekends are skipped: no session, no new prices, nothing to say.
+    # 07:00 UTC on weekdays
     - cron: '0 7 * * 1-5'
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   read:
@@ -15,6 +16,8 @@ jobs:
       TZ: Europe/London
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
@@ -23,9 +26,21 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Provisional signal and send the drumbeat
+      - name: Provisional signal and drumbeat
         env:
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
           TG_CHAT: ${{ secrets.TG_CHAT }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
         run: python daily.py
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name  "soylee22"
+          git config user.email "leeslater1992@gmail.com"
+          git add data.js data/daily_signal.json
+          if git diff --staged --quiet; then
+            echo "nothing changed"
+          else
+            git commit -m "drumbeat refresh: $(date +%Y-%m-%d)"
+            git push
+          fi

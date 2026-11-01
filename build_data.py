@@ -26,6 +26,8 @@ DATA_DIR = HERE / "data"
 
 sys.path.insert(0, str(HERE))
 from universe import FACTOR_NAMES, TRADABLE, STYLES  # noqa: E402
+from lyw_engine import build_lyw_data  # noqa: E402
+from dotcom_engine import build_dotcom_data  # noqa: E402
 from pipeline.lookthrough import consolidate, company_domain  # noqa: E402
 from pipeline.logos import company_key, load_registry  # noqa: E402
 
@@ -602,6 +604,59 @@ def main():
             } for c in factor_slots],
             "sectors": [],
         },
+    }
+
+    # Add LYW, Dot-Com Lodestar, and Combined 50/50 Dual Engine data
+    lyw_data = build_lyw_data()
+    dotcom_data = build_dotcom_data()
+
+    combined_years = []
+    lode_ann_dict = {y["year"]: y["strategy"] for y in dotcom_data.get("years", [])}
+    lyw_ann_dict = {y["year"]: y["return"] for y in lyw_data.get("archive", [])}
+
+    all_common_y = sorted(set(lode_ann_dict.keys()).intersection(set(lyw_ann_dict.keys())))
+    blend_rets = []
+    for y in all_common_y:
+        r_lode = lode_ann_dict[y]
+        r_lyw = lyw_ann_dict[y]
+        b_ret = round(0.5 * r_lode + 0.5 * r_lyw, 2)
+        blend_rets.append(b_ret)
+        combined_years.append({
+            "year": y,
+            "lodestar": r_lode,
+            "lyw": r_lyw,
+            "blend": b_ret,
+        })
+
+    if blend_rets:
+        b_arr = np.array(blend_rets)
+        growth_comb = float(np.prod(1.0 + b_arr / 100.0))
+        cagr_comb = round((growth_comb ** (1.0 / len(b_arr)) - 1.0) * 100.0, 2)
+        vol_comb = round(float(np.std(b_arr)), 2)
+        sharpe_comb = round(cagr_comb / vol_comb if vol_comb > 0 else 0.0, 2)
+        cum_b = np.cumprod(1.0 + b_arr / 100.0)
+        peak_b = np.maximum.accumulate(cum_b)
+        maxdd_comb = round(float(np.min((cum_b / peak_b - 1.0) * 100.0)), 2)
+    else:
+        growth_comb, cagr_comb, vol_comb, sharpe_comb, maxdd_comb = 1.0, 0.0, 0.0, 0.0, 0.0
+
+    payload["lyw"] = lyw_data
+    payload["dotcom"] = dotcom_data
+    payload["combined"] = {
+        "allocation": "50% Lodestar World / 50% Last Year's Winner",
+        "yearsCovered": len(combined_years),
+        "startYear": combined_years[0]["year"] if combined_years else 2000,
+        "endYear": combined_years[-1]["year"] if combined_years else 2025,
+        "stats": {
+            "cagr": cagr_comb,
+            "vol": vol_comb,
+            "sharpe": sharpe_comb,
+            "maxDrawdown": maxdd_comb,
+            "growthMultiple": round(growth_comb, 2),
+            "positiveYears": sum(y["blend"] > 0 for y in combined_years),
+            "totalYears": len(combined_years),
+        },
+        "years": combined_years,
     }
 
     body = json.dumps(payload, separators=(",", ":"), allow_nan=False)

@@ -1,0 +1,31 @@
+{
+  "settings": {
+    "universe": "historical",
+    "start": 1997,
+    "end": 2025,
+    "top_n": 1,
+    "ranking_basis": "total",
+    "return_basis": "total",
+    "stop_type": "fixed",
+    "stop": 0.35,
+    "fill": "gap",
+    "cost_bps": 0,
+    "cash_rate": 0,
+    "strict": false
+  },
+  "results": {
+    "end_value": 106994.71273522613,
+    "cagr": 0.27193007119993773,
+    "max_drawdown": -0.8050376558350945,
+    "benchmark_end": 1521.6717677670795,
+    "benchmark_cagr": 0.09842561339273992,
+    "benchmark_max_drawdown": -0.5518945927485672,
+    "years": 29,
+    "years_ahead": 16,
+    "stops": 6,
+    "first_entry": "1997-01-02",
+    "final_exit": "2026-01-02",
+    "benchmark_label": "SPY total return",
+    "minimum_ranking_coverage": 0.415983606557377
+  }
+}
