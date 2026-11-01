@@ -11,6 +11,11 @@ dst_dir = Path("/Users/leeslater/projects/atlas-stock-screener/static")
 shutil.copyfile(src_dir / "data.js", dst_dir / "lodestar-data.js")
 print(f"Copied {src_dir / 'data.js'} -> {dst_dir / 'lodestar-data.js'} ({dst_dir / 'lodestar-data.js'} size: {(dst_dir / 'lodestar-data.js').stat().st_size / 1024:.1f} KB)")
 
+# Copy assets to Atlas root assets
+if (src_dir / "assets").is_dir():
+    shutil.copytree(src_dir / "assets", dst_dir.parent / "assets", dirs_exist_ok=True)
+    print("Synchronised company logos to Atlas root assets")
+
 # 2. Build lodestar.html from index.html
 html = (src_dir / "index.html").read_text(encoding="utf-8")
 

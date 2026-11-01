@@ -187,6 +187,14 @@ def main():
     (DATA / "daily_signal.json").write_text(json.dumps(daily_payload, indent=2))
     print(f"Saved daily monitor state to {DATA / 'daily_signal.json'}")
 
+    # Refresh 2027 Contenders Race for LYW
+    try:
+        print("\nRefreshing 2027 Contenders S&P 500 race from Slickcharts & yfinance...")
+        from contenders_engine import build_contenders_chart_data
+        build_contenders_chart_data(5)
+    except Exception as e:
+        print(f"  Warning: failed to refresh contenders chart: {e}")
+
     # Rebuild data.js with fresh figures
     import subprocess
     print("\nRebuilding data.js with latest signals...")

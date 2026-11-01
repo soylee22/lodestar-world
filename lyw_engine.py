@@ -143,89 +143,143 @@ def build_lyw_data() -> dict:
         "reselectionDate": "31 Dec 2026 close",
     }
 
-    # 2027 canonical reselection race (matching winner.html)
-    contenders = [
-        {
-            "rank": 1,
-            "ticker": "MRNA",
-            "name": "Moderna Inc.",
-            "ytd": 716.3,
-            "gap": 0.0,
-            "status": "Rank 1 · 2027 Target",
-            "action": "Buy at Jan 2027 Open",
-            "desc": "Leading the 2026 S&P 500 performance race. If MRNA maintains first place through 31 December, all portfolio capital rotates 100% into MRNA on 2 January 2027.",
-        },
-        {
-            "rank": 2,
-            "ticker": "SNDK",
-            "name": "SanDisk Corporation",
-            "ytd": 477.4,
-            "gap": -238.9,
-            "status": "Rank 2 · Active Holding",
-            "action": "Active Hold (35% Stop)",
-            "desc": "Holding the second position in 2026. If SanDisk surges and overtakes Moderna by 31 December, the strategy continues holding SanDisk for a second consecutive year.",
-        },
-        {
-            "rank": 3,
-            "ticker": "MU",
-            "name": "Micron Technology Inc.",
-            "ytd": 295.8,
-            "gap": -420.5,
-            "status": "Rank 3 · Contender",
-            "action": "-420.5% Gap",
-            "desc": "Memory and semiconductor surge. Needs a +106% rally relative to Moderna over the next 45 trading sessions to claim the 2027 holding seat.",
-        },
-        {
-            "rank": 4,
-            "ticker": "DELL",
-            "name": "Dell Technologies Inc.",
-            "ytd": 164.7,
-            "gap": -551.6,
-            "status": "Rank 4 · Contender",
-            "action": "-551.6% Gap",
-            "desc": "AI server enterprise growth. Consistent momentum performer, but distant from the current runaway leader Moderna with 62 calendar days remaining.",
-        },
-        {
-            "rank": 5,
-            "ticker": "NVDA",
-            "name": "NVIDIA Corp.",
-            "ytd": 138.2,
-            "gap": -578.1,
-            "status": "Contender",
-            "action": "Trailing Contender",
-            "desc": "Dominant GPU leader following consecutive record years in 2023 and 2024.",
-        },
-        {
-            "rank": 6,
-            "ticker": "VST",
-            "name": "Vistra Corp.",
-            "ytd": 114.2,
-            "gap": -602.1,
-            "status": "Contender",
-            "action": "Trailing Contender",
-            "desc": "2024 winner (+236.8%) continuing strong nuclear and power infrastructure expansion.",
-        },
-        {
-            "rank": 7,
-            "ticker": "PLTR",
-            "name": "Palantir Technologies",
-            "ytd": 98.5,
-            "gap": -617.8,
-            "status": "Contender",
-            "action": "Trailing Contender",
-            "desc": "Enterprise AI platform adoption driving steady index outperformance.",
-        },
-        {
-            "rank": 8,
-            "ticker": "APP",
-            "name": "AppLovin Corp.",
-            "ytd": 84.2,
-            "gap": -632.1,
-            "status": "Contender",
-            "action": "Trailing Contender",
-            "desc": "Ad-tech monetization platform surging on software momentum.",
-        },
+    # Load 2027 contenders chart data if present
+    chart_path = DATA_DIR / "lyw_contenders_chart.json"
+    chart_data = None
+    if chart_path.is_file():
+        try:
+            chart_data = json.loads(chart_path.read_text(encoding="utf-8"))
+        except Exception:
+            chart_data = None
+
+    # Descriptions for known contenders
+    CONTENDER_DESCS = {
+        "MRNA": "Leading the 2026 S&P 500 performance race. If MRNA maintains first place through 31 December, all portfolio capital rotates 100% into MRNA on 2 January 2027.",
+        "SNDK": "Holding the second position in 2026. If SanDisk surges and overtakes Moderna by 31 December, the strategy continues holding SanDisk for a second consecutive year.",
+        "DELL": "Enterprise AI servers and storage growth. Surged strongly in mid-year and remains firmly in the top tier of 2026 momentum performers.",
+        "MU": "High-bandwidth memory and semiconductor surge. Memory cycle demand driving substantial index outperformance across 2026.",
+        "MPC": "Downstream refining margins and heavy capital returns driving energy sector outperformance into the 2027 race.",
+        "NVDA": "Dominant GPU leader following consecutive record years in 2023 and 2024.",
+        "VST": "2024 winner (+236.8%) continuing strong nuclear and power infrastructure expansion.",
+        "PLTR": "Enterprise AI platform adoption driving steady index outperformance.",
+        "APP": "Ad-tech monetization platform surging on software momentum.",
+    }
+
+    # Build 2027 contenders list from chart_data if available
+    contenders = []
+    if chart_data and "series" in chart_data:
+        non_spy = [s for s in chart_data["series"] if s.get("ticker") != "SPY"]
+        # Sort by current YTD descending
+        non_spy.sort(key=lambda x: x.get("currentYtd", 0), reverse=True)
+        leader_ytd = non_spy[0]["currentYtd"] if non_spy else 0.0
+
+        for idx, s in enumerate(non_spy, start=1):
+            t = s["ticker"]
+            cur_ytd = s["currentYtd"]
+            gap = round(cur_ytd - leader_ytd, 1) if idx > 1 else 0.0
+            is_hold = (t == "SNDK")
+
+            if idx == 1:
+                status = "Rank 1 · 2027 Target"
+                action = "Buy at Jan 2027 Open"
+            elif is_hold:
+                status = f"Rank {idx} · Active Holding"
+                action = "Active Hold (35% Stop)"
+            else:
+                status = f"Rank {idx} · Contender"
+                action = f"{gap}% Gap"
+
+            contenders.append({
+                "rank": idx,
+                "ticker": t,
+                "name": s["name"],
+                "ytd": cur_ytd,
+                "gap": gap,
+                "peak": s.get("peakYtd", cur_ytd),
+                "peakDate": s.get("peakDate"),
+                "status": status,
+                "action": action,
+                "desc": CONTENDER_DESCS.get(t, f"Surging momentum performer in the 2026 S&P 500 reselection race with {cur_ytd}% YTD return."),
+                "logo": s.get("logo"),
+                "color": s.get("color"),
+            })
+
+    # Fallback or fill remaining trailing contenders
+    if len(contenders) < 5:
+        contenders = [
+            {
+                "rank": 1,
+                "ticker": "MRNA",
+                "name": "Moderna Inc.",
+                "ytd": 618.5,
+                "gap": 0.0,
+                "status": "Rank 1 · 2027 Target",
+                "action": "Buy at Jan 2027 Open",
+                "desc": CONTENDER_DESCS["MRNA"],
+            },
+            {
+                "rank": 2,
+                "ticker": "SNDK",
+                "name": "SanDisk Corporation",
+                "ytd": 318.1,
+                "gap": -300.4,
+                "status": "Rank 2 · Active Holding",
+                "action": "Active Hold (35% Stop)",
+                "desc": CONTENDER_DESCS["SNDK"],
+            },
+            {
+                "rank": 3,
+                "ticker": "DELL",
+                "name": "Dell Technologies Inc.",
+                "ytd": 235.5,
+                "gap": -383.0,
+                "status": "Rank 3 · Contender",
+                "action": "-383.0% Gap",
+                "desc": CONTENDER_DESCS["DELL"],
+            },
+            {
+                "rank": 4,
+                "ticker": "MU",
+                "name": "Micron Technology Inc.",
+                "ytd": 180.7,
+                "gap": -437.8,
+                "status": "Rank 4 · Contender",
+                "action": "-437.8% Gap",
+                "desc": CONTENDER_DESCS["MU"],
+            },
+            {
+                "rank": 5,
+                "ticker": "MPC",
+                "name": "Marathon Petroleum Corp.",
+                "ytd": 172.4,
+                "gap": -446.1,
+                "status": "Rank 5 · Contender",
+                "action": "-446.1% Gap",
+                "desc": CONTENDER_DESCS["MPC"],
+            },
+        ]
+
+    # Append trailing contenders for context
+    existing_tickers = {c["ticker"] for c in contenders}
+    trailing = [
+        ("NVDA", "NVIDIA Corp.", 138.2, CONTENDER_DESCS["NVDA"]),
+        ("VST", "Vistra Corp.", 114.2, CONTENDER_DESCS["VST"]),
+        ("PLTR", "Palantir Technologies", 98.5, CONTENDER_DESCS["PLTR"]),
+        ("APP", "AppLovin Corp.", 84.2, CONTENDER_DESCS["APP"]),
     ]
+    leader_ret = contenders[0]["ytd"]
+    for t_sym, t_nm, t_ret, t_desc in trailing:
+        if t_sym not in existing_tickers:
+            contenders.append({
+                "rank": len(contenders) + 1,
+                "ticker": t_sym,
+                "name": t_nm,
+                "ytd": t_ret,
+                "gap": round(t_ret - leader_ret, 1),
+                "status": "Contender",
+                "action": "Trailing Contender",
+                "desc": t_desc,
+            })
 
     stats = {
         "startYear": 1997,
@@ -251,6 +305,7 @@ def build_lyw_data() -> dict:
         },
         "livePosition": live_position,
         "race2027": contenders,
+        "contendersChart": chart_data,
         "stats": stats,
         "archive": archive,
     }
