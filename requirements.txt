@@ -3,3 +3,4 @@ numpy
 yfinance
 exchange_calendars
 Pillow
+beautifulsoup4

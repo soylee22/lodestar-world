@@ -5,10 +5,34 @@ the message instead of sending (so scripts are safe to run locally).
 """
 from __future__ import annotations
 import os, json, urllib.request, urllib.parse
+from pathlib import Path
 
 def telegram(text: str, token: str | None = None, chat: str | None = None, thread: int | None = None) -> bool:
     token = token or os.environ.get("TG_TOKEN")
     chat  = chat  or os.environ.get("TG_CHAT")
+    if not token or not chat:
+        # Check local fallback file if present
+        env_fallback = Path("/Users/leeslater/SecondBrain/tools/reading-archive/.tg.env")
+        if env_fallback.is_file():
+            try:
+                for line in env_fallback.read_text(encoding="utf-8").splitlines():
+                    line = line.strip()
+                    if line and not line.startswith("#") and "=" in line:
+                        k, v = line.split("=", 1)
+                        k = k.strip()
+                        v = v.strip().strip('"').strip("'")
+                        if k == "TG_TOKEN" and not token:
+                            token = v
+                        elif k == "TG_CHAT" and not chat:
+                            chat = v
+                        elif k == "TG_THREAD" and thread is None:
+                            try:
+                                thread = int(v)
+                            except Exception:
+                                pass
+            except Exception:
+                pass
+
     if not token or not chat:
         print("[notify] no TG creds set; message would be:\n" + "-"*50 + "\n" + text[:1500] + "\n" + "-"*50)
         return False

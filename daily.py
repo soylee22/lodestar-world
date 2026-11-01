@@ -200,6 +200,54 @@ def main():
     print("\nRebuilding data.js with latest signals...")
     subprocess.run([sys.executable, str(HERE / "build_data.py")], check=True)
 
+    # Rebuild index.html frontend
+    print("\nRebuilding index.html frontend...")
+    subprocess.run([sys.executable, str(HERE / "build_frontend.py")], check=True)
+
+    # Dispatch clean consolidated Telegram daily briefing
+    try:
+        from lyw_engine import build_lyw_data
+        lyw = build_lyw_data()
+        lp = lyw.get("livePosition", {})
+        r27 = lyw.get("race2027", [])
+        leader = r27[0] if r27 else {}
+
+        top_factors = ranks[:3]
+        factors_summary = "\n".join([
+            f"  {i}. {r['name']} ({r['ticker']}): <b>{r['mom']:+.1f}%</b>"
+            for i, r in enumerate(top_factors, 1)
+        ])
+
+        top_contenders = [f"{c['ticker']} ({c['ytd']:+.1f}%)" for c in r27[:4]]
+        contenders_str = ", ".join(top_contenders)
+
+        gate_status = "ALL CLEAR (Regime Normal)" if not is_cash else "CASH GATE TRIGGERED"
+
+        msg = (
+            f"<b>Lodestar World &amp; Last Year's Winner · Daily Monitor</b>\n"
+            f"<i>As of {date.today().isoformat()} · {days_left} calendar days to rebalance</i>\n\n"
+            f"<b>🌍 LODESTAR WORLD (50% Sleeve)</b>\n"
+            f"• Projected 1st: <b>{ranks[0]['name']}</b> ({ranks[0]['ticker']}) at <b>{ranks[0]['mom']:+.1f}%</b>\n"
+            f"• 8-Mo Momentum Standings:\n{factors_summary}\n"
+            f"• S&amp;P 500 Cash Gate: <b>{gate_status}</b> ({spx_chg_val:+.1f}% vs 19m ago, limit {CASH_THRESHOLD*100:.0f}%)\n\n"
+            f"<b>🎯 LAST YEAR'S WINNER (50% Sleeve)</b>\n"
+            f"• Active 2026 Holding: <b>{lp.get('ticker', 'SNDK')}</b> (${lp.get('currentPrice', 0):.2f})\n"
+            f"• 35% Trailing Stop: <b>${lp.get('stopLossPrice', 0):.2f}</b> ({lp.get('statusLabel', 'Untouched')})\n"
+            f"• 2027 Leader: <b>{leader.get('ticker', 'MRNA')}</b> ({leader.get('ytd', 0):+.1f}% YTD)\n"
+            f"• 2027 Contenders: {contenders_str}\n\n"
+            f"<b>📊 Live Dashboard &amp; Interactive Charts:</b>\n"
+            f"https://soylee22.github.io/lodestar-world/"
+        )
+
+        print("\nSending consolidated Telegram update...")
+        sent = telegram(msg)
+        if sent:
+            print("Telegram notification dispatched successfully.")
+        else:
+            print("Telegram notification printed to console (fallback).")
+    except Exception as e:
+        print(f"Warning: Failed to dispatch Telegram briefing: {e}")
+
     # Sync to Atlas if present
     sync_script = HERE / "sync_to_atlas.py"
     if sync_script.is_file():

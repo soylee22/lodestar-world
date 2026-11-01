@@ -2,8 +2,8 @@ name: Daily read and drumbeat
 
 on:
   schedule:
-    # 07:00 UTC on weekdays
-    - cron: '0 7 * * 1-5'
+    # 22:00 UTC on weekdays (after London and New York market close)
+    - cron: '0 22 * * 1-5'
   workflow_dispatch:
 
 permissions:
@@ -33,14 +33,14 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
         run: python daily.py
 
-      - name: Commit refreshed data
+      - name: Commit refreshed data and pages
         run: |
           git config user.name  "soylee22"
           git config user.email "leeslater1992@gmail.com"
-          git add data.js data/daily_signal.json
+          git add -A
           if git diff --staged --quiet; then
-            echo "nothing changed"
+            echo "No changes to commit"
           else
-            git commit -m "drumbeat refresh: $(date +%Y-%m-%d)"
+            git commit -m "Automated daily drumbeat refresh: $(date +%Y-%m-%d)"
             git push
           fi
