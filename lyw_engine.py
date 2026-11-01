@@ -44,6 +44,7 @@ COMPANY_NAMES = {
     "PLTR": "Palantir Technologies",
     "SNDK": "SanDisk Corp.",
     "MRNA": "Moderna Inc.",
+    "MU": "Micron Technology Inc.",
     "VST": "Vistra Corp.",
     "APP": "AppLovin Corp.",
     "GE": "GE Aerospace",
@@ -95,7 +96,7 @@ def build_lyw_data() -> dict:
 
     # Live 2026 holding: SNDK
     # Fixed execution parameters from trading record
-    entry_price_2026 = 1150.89
+    entry_price_2026 = 1557.71
     peak_price_2026 = 1557.71
     cur_price_2026 = 1150.89
     # Try fetching live quote if available
@@ -135,16 +136,88 @@ def build_lyw_data() -> dict:
         "reselectionDate": "31 Dec 2026 close",
     }
 
-    # 2027 contender race
+    # 2027 canonical reselection race (matching winner.html)
     contenders = [
-        {"rank": 1, "ticker": "MRNA", "name": "Moderna Inc.", "ytd": 716.3, "gap": 0.0, "status": "Projected 2027 Winner"},
-        {"rank": 2, "ticker": "NVDA", "name": "NVIDIA Corp.", "ytd": 239.0, "gap": -477.3, "status": "Contender"},
-        {"rank": 3, "ticker": "VST", "name": "Vistra Corp.", "ytd": 188.5, "gap": -527.8, "status": "Contender"},
-        {"rank": 4, "ticker": "PLTR", "name": "Palantir Technologies", "ytd": 142.1, "gap": -574.2, "status": "Contender"},
-        {"rank": 5, "ticker": "APP", "name": "AppLovin Corp.", "ytd": 128.4, "gap": -587.9, "status": "Contender"},
-        {"rank": 6, "ticker": "GE", "name": "GE Aerospace", "ytd": 89.2, "gap": -627.1, "status": "Contender"},
-        {"rank": 7, "ticker": "AXON", "name": "Axon Enterprise", "ytd": 74.6, "gap": -641.7, "status": "Contender"},
-        {"rank": 8, "ticker": "DELL", "name": "Dell Technologies", "ytd": 68.3, "gap": -648.0, "status": "Contender"},
+        {
+            "rank": 1,
+            "ticker": "MRNA",
+            "name": "Moderna Inc.",
+            "ytd": 716.3,
+            "gap": 0.0,
+            "status": "Rank 1 · 2027 Target",
+            "action": "Buy at Jan 2027 Open",
+            "desc": "Leading the 2026 S&P 500 performance race. If MRNA maintains first place through 31 December, all portfolio capital rotates 100% into MRNA on 2 January 2027.",
+        },
+        {
+            "rank": 2,
+            "ticker": "SNDK",
+            "name": "SanDisk Corporation",
+            "ytd": 477.4,
+            "gap": -238.9,
+            "status": "Rank 2 · Active Holding",
+            "action": "Active Hold (35% Stop)",
+            "desc": "Holding the second position in 2026. If SanDisk surges and overtakes Moderna by 31 December, the strategy continues holding SanDisk for a second consecutive year.",
+        },
+        {
+            "rank": 3,
+            "ticker": "MU",
+            "name": "Micron Technology Inc.",
+            "ytd": 295.8,
+            "gap": -420.5,
+            "status": "Rank 3 · Contender",
+            "action": "-420.5% Gap",
+            "desc": "Memory and semiconductor surge. Needs a +106% rally relative to Moderna over the next 45 trading sessions to claim the 2027 holding seat.",
+        },
+        {
+            "rank": 4,
+            "ticker": "DELL",
+            "name": "Dell Technologies Inc.",
+            "ytd": 164.7,
+            "gap": -551.6,
+            "status": "Rank 4 · Contender",
+            "action": "-551.6% Gap",
+            "desc": "AI server enterprise growth. Consistent momentum performer, but distant from the current runaway leader Moderna with 62 calendar days remaining.",
+        },
+        {
+            "rank": 5,
+            "ticker": "NVDA",
+            "name": "NVIDIA Corp.",
+            "ytd": 138.2,
+            "gap": -578.1,
+            "status": "Contender",
+            "action": "Trailing Contender",
+            "desc": "Dominant GPU leader following consecutive record years in 2023 and 2024.",
+        },
+        {
+            "rank": 6,
+            "ticker": "VST",
+            "name": "Vistra Corp.",
+            "ytd": 114.2,
+            "gap": -602.1,
+            "status": "Contender",
+            "action": "Trailing Contender",
+            "desc": "2024 winner (+236.8%) continuing strong nuclear and power infrastructure expansion.",
+        },
+        {
+            "rank": 7,
+            "ticker": "PLTR",
+            "name": "Palantir Technologies",
+            "ytd": 98.5,
+            "gap": -617.8,
+            "status": "Contender",
+            "action": "Trailing Contender",
+            "desc": "Enterprise AI platform adoption driving steady index outperformance.",
+        },
+        {
+            "rank": 8,
+            "ticker": "APP",
+            "name": "AppLovin Corp.",
+            "ytd": 84.2,
+            "gap": -632.1,
+            "status": "Contender",
+            "action": "Trailing Contender",
+            "desc": "Ad-tech monetization platform surging on software momentum.",
+        },
     ]
 
     stats = {
