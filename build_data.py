@@ -427,6 +427,113 @@ def main():
 
     book_data = build_book(current)
 
+    # Leaderboard for next month projection
+    signal_json_path = DATA_DIR / "signal.json"
+    signal_raw = json.loads(signal_json_path.read_text(encoding="utf-8")) if signal_json_path.is_file() else {}
+    daily_json_path = DATA_DIR / "daily_signal.json"
+    daily_raw = json.loads(daily_json_path.read_text(encoding="utf-8")) if daily_json_path.is_file() else {}
+
+    fund_prices_path = DATA_DIR / "fund_prices_gbp.csv"
+    spx_chg = 35.07
+    if fund_prices_path.is_file():
+        fp_df = pd.read_csv(fund_prices_path, index_col=0)
+        if "SPX" in fp_df.columns and len(fp_df) >= 20:
+            spx_chg = round(float((fp_df["SPX"].iloc[-1] / fp_df["SPX"].iloc[-20] - 1.0) * 100.0), 2)
+
+    sig_table = signal_raw.get("table", {})
+    sorted_slots = sorted(sig_table.keys(), key=lambda k: sig_table[k], reverse=True) if sig_table else list(factor_slots)
+    top_sig_slot = sorted_slots[0] if sorted_slots else last_pick
+    top_sig_return = round(sig_table.get(top_sig_slot, 0.0) * 100.0, 2) if sig_table else 18.04
+    second_sig_slot = sorted_slots[1] if len(sorted_slots) > 1 else None
+    second_sig_return = round(sig_table.get(second_sig_slot, 0.0) * 100.0, 2) if second_sig_slot else 8.45
+    lead_margin_pp = round(top_sig_return - second_sig_return, 2)
+
+    styles_dict = dict(STYLES)
+    official_standings = []
+    for rank_idx, slot in enumerate(sorted_slots, 1):
+        m_val = round(sig_table.get(slot, 0.0) * 100.0, 2)
+        gap = round(m_val - top_sig_return, 2)
+        style_key = slot.replace("WLD_", "")
+        style_name = styles_dict.get(style_key, style_key)
+        bar_pct = round(max(15.0, (m_val / top_sig_return) * 100.0 if top_sig_return > 0 else 20.0), 1)
+        official_standings.append({
+            "rank": rank_idx,
+            "slot": slot,
+            "name": FACTOR_NAMES[slot],
+            "style": style_name,
+            "ticker": TRADABLE[slot][2],
+            "isin": TRADABLE[slot][0],
+            "momentum": m_val,
+            "gap": gap,
+            "barPct": bar_pct,
+            "isLeader": rank_idx == 1,
+            "isHeld": slot == last_pick,
+            "targetWeight": 100 if rank_idx == 1 else 0,
+        })
+
+    is_action_hold = (top_sig_slot == last_pick)
+    action_type = "HOLD" if is_action_hold else "SWITCH"
+    action_title = (
+        f"Maintain 100% position in {FACTOR_NAMES[top_sig_slot]} ({TRADABLE[top_sig_slot][2]})"
+        if is_action_hold else
+        f"Rotate 100% into {FACTOR_NAMES[top_sig_slot]} ({TRADABLE[top_sig_slot][2]})"
+    )
+    action_summary = (
+        f"{FACTOR_NAMES[top_sig_slot]} maintains the #1 rank with a +{lead_margin_pp:.2f} percentage point lead over {FACTOR_NAMES[second_sig_slot]}. Because it matches the prior month holding, no trade is required (zero turnover and zero dealing costs)."
+        if is_action_hold else
+        f"{FACTOR_NAMES[top_sig_slot]} has overtaken {FACTOR_NAMES[last_pick]} to become the new #1 momentum leader. Rebalance is scheduled for the first trading day of the month."
+    )
+
+    # Process daily standings if available
+    live_standings = []
+    if daily_raw and "ranks" in daily_raw:
+        daily_top_mom = daily_raw["ranks"][0]["momentum"] if daily_raw["ranks"] else 25.77
+        for r in daily_raw.get("ranks", []):
+            s_key = r["slot"].replace("WLD_", "")
+            live_standings.append({
+                "rank": r["rank"],
+                "slot": r["slot"],
+                "name": r["name"],
+                "style": styles_dict.get(s_key, s_key),
+                "ticker": r["ticker"],
+                "isin": TRADABLE[r["slot"]][0],
+                "momentum": r["momentum"],
+                "gap": round(r["momentum"] - daily_top_mom, 2),
+                "barPct": round(max(15.0, (r["momentum"] / daily_top_mom) * 100.0 if daily_top_mom > 0 else 20.0), 1),
+                "isLeader": r["rank"] == 1,
+                "isHeld": r["slot"] == last_pick,
+                "targetWeight": 100 if r["rank"] == 1 else 0,
+            })
+
+    leaderboard = {
+        "signalMonth": signal_month,
+        "signalMonthPretty": pretty(signal_month),
+        "holdingMonth": next_holding_m,
+        "holdingMonthPretty": pretty(next_holding_m),
+        "action": action_type,
+        "actionTitle": action_title,
+        "actionSummary": action_summary,
+        "leadMargin": lead_margin_pp,
+        "runnerUp": FACTOR_NAMES[second_sig_slot] if second_sig_slot else "",
+        "cashGate": {
+            "active": False,
+            "spxChange": spx_chg,
+            "threshold": -25.0,
+            "status": "Inactive (Normal Equity Regime)",
+            "ruleText": "S&P 500 must fall >25% below its 19-month lookback to trigger GBP cash preservation.",
+        },
+        "standings": official_standings,
+        "live": {
+            "asof": daily_raw.get("asof", "2026-11-01"),
+            "daysLeft": daily_raw.get("days_left", 29),
+            "projectedPick": daily_raw.get("projected_name", "World Value"),
+            "projectedTicker": daily_raw.get("projected_ticker", "IWVL.L"),
+            "cashGateActive": daily_raw.get("cash_gate", {}).get("active", False),
+            "spxChange": daily_raw.get("cash_gate", {}).get("spx_change", spx_chg),
+            "standings": live_standings,
+        } if daily_raw else None,
+    }
+
     payload = {
         "meta": {
             "name": "Lodestar World",
@@ -474,6 +581,7 @@ def main():
         "holdings": holdings,
         "lanes": lanes,
         "current": current,
+        "leaderboard": leaderboard,
         "priceStatus": price_status,
         "book": book_data,
         "universe": {

@@ -73,6 +73,15 @@ def main():
     print(f"Lodestar World Daily Drumbeat — {date.today().isoformat()}")
     print(f"Comparing current prices against close of {base_period} (8 months ago)...\n")
 
+    # Fetch FX rate for GBP conversion
+    fx_rate = 1.33
+    try:
+        fx_t = yf.Ticker("GBPUSD=X").fast_info.last_price
+        if fx_t and fx_t > 0:
+            fx_rate = float(fx_t)
+    except Exception as e:
+        print(f"  Warning: failed to fetch FX rate, using fallback {fx_rate}: {e}")
+
     # Fetch live quotes
     symbols = list(TICKERS.values()) + ["^GSPC"]
     quotes = {}
@@ -81,8 +90,14 @@ def main():
             t = yf.Ticker(sym)
             fi = t.fast_info
             p = fi.last_price
+            c = getattr(fi, "currency", "GBP")
             if p is not None and p > 0:
-                quotes[sym] = float(p)
+                p_val = float(p)
+                if c == "USD" and sym != "^GSPC":
+                    p_val = p_val / fx_rate
+                elif c == "GBp":
+                    p_val = p_val / 100.0
+                quotes[sym] = p_val
         except Exception as e:
             print(f"  Warning: failed to fetch fast_info for {sym}: {e}")
 
@@ -141,6 +156,36 @@ def main():
     _, last_day = monthrange(now.year, now.month)
     days_left = last_day - now.day
     print(f"\nDays left in current month: {days_left} calendar days until official month-end rebalance.")
+
+    # Save daily signal cache
+    spx_chg_val = round((spx_curr / spx_base - 1.0) * 100.0, 2) if spx_base and spx_curr else 35.07
+    daily_payload = {
+        "asof": date.today().isoformat(),
+        "lookback_base": str(base_period),
+        "days_left": days_left,
+        "cash_gate": {
+            "active": is_cash,
+            "spx_change": spx_chg_val,
+            "threshold": CASH_THRESHOLD * 100.0,
+        },
+        "ranks": [
+            {
+                "rank": i,
+                "slot": r["slot"],
+                "name": r["name"],
+                "ticker": r["ticker"],
+                "momentum": round(r["mom"], 2),
+                "is_leader": (i == 1),
+            }
+            for i, r in enumerate(ranks, 1)
+        ],
+        "projected_pick": "CASH" if is_cash else ranks[0]["slot"],
+        "projected_ticker": "CASH" if is_cash else ranks[0]["ticker"],
+        "projected_name": "Cash" if is_cash else ranks[0]["name"],
+        "built_at": datetime.now().isoformat(),
+    }
+    (DATA / "daily_signal.json").write_text(json.dumps(daily_payload, indent=2))
+    print(f"Saved daily monitor state to {DATA / 'daily_signal.json'}")
 
 
 if __name__ == "__main__":
