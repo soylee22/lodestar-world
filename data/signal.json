@@ -1,0 +1,23 @@
+{
+  "signal_month": "2026-10",
+  "holding_month": "2026-11",
+  "pick": "WLD_VAL",
+  "cash": false,
+  "ticker": "IWVL.L",
+  "isin": "IE00BP3QZB59",
+  "name": "World Value",
+  "table": {
+    "WLD_MOM": 0.08175282589531041,
+    "WLD_QUAL": 0.0845379747436974,
+    "WLD_VAL": 0.18044566314810728,
+    "WLD_SMALL": 0.032577839327830205,
+    "WLD_DIV": 0.03362659314572469
+  },
+  "previous": {
+    "pick": "WLD_VAL",
+    "cash": false
+  },
+  "source": "LSE Total Return",
+  "stale": false,
+  "built_at": "2026-11-01T15:02:20.086888+00:00"
+}

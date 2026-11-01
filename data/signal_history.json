@@ -1,0 +1,1757 @@
+{
+  "2017-01": {
+    "signal_month": "2017-01",
+    "holding_month": "2017-02",
+    "pick": "WLD_VAL",
+    "cash": false,
+    "ticker": "IWVL.L",
+    "name": "World Value",
+    "table": {
+      "WLD_MOM": 0.23546207954992138,
+      "WLD_QUAL": 0.21214889511650425,
+      "WLD_VAL": 0.30246671798259905,
+      "WLD_SMALL": 0.27929777520482113,
+      "WLD_DIV": 0.12449745758792585
+    }
+  },
+  "2017-02": {
+    "signal_month": "2017-02",
+    "holding_month": "2017-03",
+    "pick": "WLD_VAL",
+    "cash": false,
+    "ticker": "IWVL.L",
+    "name": "World Value",
+    "table": {
+      "WLD_MOM": 0.15124395306316996,
+      "WLD_QUAL": 0.17665072217794608,
+      "WLD_VAL": 0.28814661346188686,
+      "WLD_SMALL": 0.2366298820035544,
+      "WLD_DIV": 0.17817719685908995
+    }
+  },
+  "2017-03": {
+    "signal_month": "2017-03",
+    "holding_month": "2017-04",
+    "pick": "WLD_VAL",
+    "cash": false,
+    "ticker": "IWVL.L",
+    "name": "World Value",
+    "table": {
+      "WLD_MOM": 0.10810363365735398,
+      "WLD_QUAL": 0.12209212397924962,
+      "WLD_VAL": 0.19014876695962535,
+      "WLD_SMALL": 0.1669498349529186,
+      "WLD_DIV": 0.14402781725798164
+    }
+  },
+  "2017-04": {
+    "signal_month": "2017-04",
+    "holding_month": "2017-05",
+    "pick": "WLD_SMALL",
+    "cash": false,
+    "ticker": "WSML.L",
+    "name": "World Small Cap",
+    "table": {
+      "WLD_MOM": 0.11489857035499185,
+      "WLD_QUAL": 0.09841417220063509,
+      "WLD_VAL": 0.1291447886991901,
+      "WLD_SMALL": 0.13336060795851812,
+      "WLD_DIV": 0.1184777663304053
+    }
+  },
+  "2017-05": {
+    "signal_month": "2017-05",
+    "holding_month": "2017-06",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.14227861228446126,
+      "WLD_QUAL": 0.12106354239106087,
+      "WLD_VAL": 0.12572021872736472,
+      "WLD_SMALL": 0.11698085226139354,
+      "WLD_DIV": 0.11610530155574428
+    }
+  },
+  "2017-06": {
+    "signal_month": "2017-06",
+    "holding_month": "2017-07",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.101695602370097,
+      "WLD_QUAL": 0.0718643850920544,
+      "WLD_VAL": 0.05779120202486254,
+      "WLD_SMALL": 0.1001062041303995,
+      "WLD_DIV": 0.09486832823565838
+    }
+  },
+  "2017-07": {
+    "signal_month": "2017-07",
+    "holding_month": "2017-08",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.13803637023157944,
+      "WLD_QUAL": 0.08149724207382358,
+      "WLD_VAL": 0.07932940283124079,
+      "WLD_SMALL": 0.088775371525877,
+      "WLD_DIV": 0.03737158026569709
+    }
+  },
+  "2017-08": {
+    "signal_month": "2017-08",
+    "holding_month": "2017-09",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.13462053422707876,
+      "WLD_QUAL": 0.06853148687405519,
+      "WLD_VAL": 0.04999080855394267,
+      "WLD_SMALL": 0.07539857183698917,
+      "WLD_DIV": -0.02807068898035181
+    }
+  },
+  "2017-09": {
+    "signal_month": "2017-09",
+    "holding_month": "2017-10",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.109922019341258,
+      "WLD_QUAL": 0.062037956058285104,
+      "WLD_VAL": 0.0418963254112763,
+      "WLD_SMALL": 0.06851169099972987,
+      "WLD_DIV": 0.021020618036869054
+    }
+  },
+  "2017-10": {
+    "signal_month": "2017-10",
+    "holding_month": "2017-11",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.14384886599190505,
+      "WLD_QUAL": 0.05575653280491366,
+      "WLD_VAL": 0.059170937134190194,
+      "WLD_SMALL": 0.060716809866067534,
+      "WLD_DIV": -0.001442924739923357
+    }
+  },
+  "2017-11": {
+    "signal_month": "2017-11",
+    "holding_month": "2017-12",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.12797742598215445,
+      "WLD_QUAL": 0.05708518659706252,
+      "WLD_VAL": 0.06623476276286899,
+      "WLD_SMALL": 0.06067186274107672,
+      "WLD_DIV": -0.014090136458008717
+    }
+  },
+  "2017-12": {
+    "signal_month": "2017-12",
+    "holding_month": "2018-01",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.158180302519227,
+      "WLD_QUAL": 0.09806226384806704,
+      "WLD_VAL": 0.11731003522392336,
+      "WLD_SMALL": 0.09265749347308794,
+      "WLD_DIV": 0.011298597038153169
+    }
+  },
+  "2018-01": {
+    "signal_month": "2018-01",
+    "holding_month": "2018-02",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.12854540541643034,
+      "WLD_QUAL": 0.04404034047074035,
+      "WLD_VAL": 0.09863591582361297,
+      "WLD_SMALL": 0.06711066703567736,
+      "WLD_DIV": 0.02351949375516682
+    }
+  },
+  "2018-02": {
+    "signal_month": "2018-02",
+    "holding_month": "2018-03",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.15097805723460778,
+      "WLD_QUAL": 0.05066277761569449,
+      "WLD_VAL": 0.08246360670743913,
+      "WLD_SMALL": 0.047546385348080866,
+      "WLD_DIV": -0.004852286624881241
+    }
+  },
+  "2018-03": {
+    "signal_month": "2018-03",
+    "holding_month": "2018-04",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.06577809835300918,
+      "WLD_QUAL": 0.016614835627243085,
+      "WLD_VAL": 0.01707450550783851,
+      "WLD_SMALL": 0.021643554872894155,
+      "WLD_DIV": -0.018255156400482808
+    }
+  },
+  "2018-04": {
+    "signal_month": "2018-04",
+    "holding_month": "2018-05",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.07951589176332519,
+      "WLD_QUAL": 0.03221429237264917,
+      "WLD_VAL": 0.0541837112514878,
+      "WLD_SMALL": 0.03423456613383724,
+      "WLD_DIV": 0.027811192664435325
+    }
+  },
+  "2018-05": {
+    "signal_month": "2018-05",
+    "holding_month": "2018-06",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.15942240952722675,
+      "WLD_QUAL": 0.09727068694191665,
+      "WLD_VAL": 0.06919983829290821,
+      "WLD_SMALL": 0.10257381845625968,
+      "WLD_DIV": -0.016430255882624256
+    }
+  },
+  "2018-06": {
+    "signal_month": "2018-06",
+    "holding_month": "2018-07",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.10370442313692418,
+      "WLD_QUAL": 0.06836190390487462,
+      "WLD_VAL": 0.018054793225449783,
+      "WLD_SMALL": 0.08995154298745955,
+      "WLD_DIV": -0.02464574957823651
+    }
+  },
+  "2018-07": {
+    "signal_month": "2018-07",
+    "holding_month": "2018-08",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.11549194231720783,
+      "WLD_QUAL": 0.08055420548017933,
+      "WLD_VAL": 0.03476197244229118,
+      "WLD_SMALL": 0.08868387978692316,
+      "WLD_DIV": 0.01649059269617248
+    }
+  },
+  "2018-08": {
+    "signal_month": "2018-08",
+    "holding_month": "2018-09",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.1614097754604642,
+      "WLD_QUAL": 0.08731291304583255,
+      "WLD_VAL": 0.009917199013722788,
+      "WLD_SMALL": 0.1047184712383562,
+      "WLD_DIV": -0.004560634897834648
+    }
+  },
+  "2018-09": {
+    "signal_month": "2018-09",
+    "holding_month": "2018-10",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.14903187120812111,
+      "WLD_QUAL": 0.10584866500016687,
+      "WLD_VAL": 0.024701391765697744,
+      "WLD_SMALL": 0.10494520811951835,
+      "WLD_DIV": 0.011724314994832952
+    }
+  },
+  "2018-10": {
+    "signal_month": "2018-10",
+    "holding_month": "2018-11",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": 0.05353179147703768,
+      "WLD_QUAL": 0.06979965532972199,
+      "WLD_VAL": -0.0030624623261856776,
+      "WLD_SMALL": 0.03457434487782751,
+      "WLD_DIV": 0.022615880044035253
+    }
+  },
+  "2018-11": {
+    "signal_month": "2018-11",
+    "holding_month": "2018-12",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.11205182658211976,
+      "WLD_QUAL": 0.09672889373537252,
+      "WLD_VAL": 0.0338472891967474,
+      "WLD_SMALL": 0.048510436663391054,
+      "WLD_DIV": 0.047752771738995614
+    }
+  },
+  "2018-12": {
+    "signal_month": "2018-12",
+    "holding_month": "2019-01",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.003734269345983865,
+      "WLD_QUAL": 0.002893311016952671,
+      "WLD_VAL": -0.07826440588001027,
+      "WLD_SMALL": -0.06310676335466892,
+      "WLD_DIV": -0.05228752849971019
+    }
+  },
+  "2019-01": {
+    "signal_month": "2019-01",
+    "holding_month": "2019-02",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": -0.028228178889391553,
+      "WLD_QUAL": -0.012284550115680304,
+      "WLD_VAL": -0.04464213553734697,
+      "WLD_SMALL": -0.06978235432686497,
+      "WLD_DIV": -0.11799469720219558
+    }
+  },
+  "2019-02": {
+    "signal_month": "2019-02",
+    "holding_month": "2019-03",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": -0.013318242773619482,
+      "WLD_QUAL": 0.009041625322340652,
+      "WLD_VAL": -0.04073085955648015,
+      "WLD_SMALL": -0.058053515972622205,
+      "WLD_DIV": -0.10169389141119711
+    }
+  },
+  "2019-03": {
+    "signal_month": "2019-03",
+    "holding_month": "2019-04",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": 0.012260094428990564,
+      "WLD_QUAL": 0.02334384213398666,
+      "WLD_VAL": -0.05360073519105535,
+      "WLD_SMALL": -0.05011335944031603,
+      "WLD_DIV": -0.10870922575975794
+    }
+  },
+  "2019-04": {
+    "signal_month": "2019-04",
+    "holding_month": "2019-05",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": 0.0008261419893682564,
+      "WLD_QUAL": 0.03704506770058713,
+      "WLD_VAL": -0.023994241387423343,
+      "WLD_SMALL": -0.040167444052722656,
+      "WLD_DIV": -0.07553034224229871
+    }
+  },
+  "2019-05": {
+    "signal_month": "2019-05",
+    "holding_month": "2019-06",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": -0.012552670831131096,
+      "WLD_QUAL": 0.008583617459683612,
+      "WLD_VAL": -0.08860337245053684,
+      "WLD_SMALL": -0.06428154159991095,
+      "WLD_DIV": -0.12619938218542281
+    }
+  },
+  "2019-06": {
+    "signal_month": "2019-06",
+    "holding_month": "2019-07",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.12260889719064783,
+      "WLD_QUAL": 0.1126440703296403,
+      "WLD_VAL": 0.011752655035957682,
+      "WLD_SMALL": 0.05836226223529084,
+      "WLD_DIV": -0.05944481355287179
+    }
+  },
+  "2019-07": {
+    "signal_month": "2019-07",
+    "holding_month": "2019-08",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.1969974145331268,
+      "WLD_QUAL": 0.18106133046737183,
+      "WLD_VAL": 0.06251036021675338,
+      "WLD_SMALL": 0.1257178217682362,
+      "WLD_DIV": -0.0343485454973691
+    }
+  },
+  "2019-08": {
+    "signal_month": "2019-08",
+    "holding_month": "2019-09",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.2564027182714601,
+      "WLD_QUAL": 0.21060802910203136,
+      "WLD_VAL": 0.07908559090804701,
+      "WLD_SMALL": 0.15654734400265058,
+      "WLD_DIV": -0.0031637939315977137
+    }
+  },
+  "2019-09": {
+    "signal_month": "2019-09",
+    "holding_month": "2019-10",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.2073831407478317,
+      "WLD_QUAL": 0.18486884612945853,
+      "WLD_VAL": 0.07722325941628094,
+      "WLD_SMALL": 0.11256312448421557,
+      "WLD_DIV": 0.1223810253401374
+    }
+  },
+  "2019-10": {
+    "signal_month": "2019-10",
+    "holding_month": "2019-11",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.12908411496874939,
+      "WLD_QUAL": 0.12216094162280089,
+      "WLD_VAL": 0.06090111664626763,
+      "WLD_SMALL": 0.059723601067745546,
+      "WLD_DIV": 0.07116328311242381
+    }
+  },
+  "2019-11": {
+    "signal_month": "2019-11",
+    "holding_month": "2019-12",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": 0.11670839467939831,
+      "WLD_QUAL": 0.1173369678579852,
+      "WLD_VAL": 0.07349763878183468,
+      "WLD_SMALL": 0.08518557125642578,
+      "WLD_DIV": 0.054282025696468006
+    }
+  },
+  "2019-12": {
+    "signal_month": "2019-12",
+    "holding_month": "2020-01",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": 0.07793626348650817,
+      "WLD_QUAL": 0.08970525175889565,
+      "WLD_VAL": 0.056048303605105376,
+      "WLD_SMALL": 0.05577537592397963,
+      "WLD_DIV": 0.03885826360021216
+    }
+  },
+  "2020-01": {
+    "signal_month": "2020-01",
+    "holding_month": "2020-02",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": 0.12485260071342807,
+      "WLD_QUAL": 0.12736126402977876,
+      "WLD_VAL": 0.08436099723298063,
+      "WLD_SMALL": 0.07235580606947956,
+      "WLD_DIV": 0.04140996855274959
+    }
+  },
+  "2020-02": {
+    "signal_month": "2020-02",
+    "holding_month": "2020-03",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": -0.010696694159279097,
+      "WLD_QUAL": -0.023754778562206202,
+      "WLD_VAL": -0.06919095574779932,
+      "WLD_SMALL": -0.06645485006747343,
+      "WLD_DIV": -0.07778600192776708
+    }
+  },
+  "2020-03": {
+    "signal_month": "2020-03",
+    "holding_month": "2020-04",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": -0.10073888705838652,
+      "WLD_QUAL": -0.11754483145674777,
+      "WLD_VAL": -0.2024781821799212,
+      "WLD_SMALL": -0.2565744542744157,
+      "WLD_DIV": -0.21815317979003646
+    }
+  },
+  "2020-04": {
+    "signal_month": "2020-04",
+    "holding_month": "2020-05",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": -0.02543360854842347,
+      "WLD_QUAL": -0.020992013956649846,
+      "WLD_VAL": -0.1212468739130963,
+      "WLD_SMALL": -0.1264130717654074,
+      "WLD_DIV": -0.15613013554376431
+    }
+  },
+  "2020-05": {
+    "signal_month": "2020-05",
+    "holding_month": "2020-06",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.04543037618771262,
+      "WLD_QUAL": 0.016164847279325434,
+      "WLD_VAL": -0.124713061500339,
+      "WLD_SMALL": -0.07590773072626245,
+      "WLD_DIV": -0.15713570283766443
+    }
+  },
+  "2020-06": {
+    "signal_month": "2020-06",
+    "holding_month": "2020-07",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.14362147487498245,
+      "WLD_QUAL": 0.056712978723830076,
+      "WLD_VAL": -0.10073537414986355,
+      "WLD_SMALL": -0.026961354232257984,
+      "WLD_DIV": -0.1080046887939412
+    }
+  },
+  "2020-07": {
+    "signal_month": "2020-07",
+    "holding_month": "2020-08",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.11993223588706203,
+      "WLD_QUAL": -0.0027860321614880945,
+      "WLD_VAL": -0.19277509747302868,
+      "WLD_SMALL": -0.08170313374552185,
+      "WLD_DIV": -0.16684376968252657
+    }
+  },
+  "2020-08": {
+    "signal_month": "2020-08",
+    "holding_month": "2020-09",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.16767580946638838,
+      "WLD_QUAL": 0.037710299878183084,
+      "WLD_VAL": -0.17028613244806912,
+      "WLD_SMALL": -0.05635415261353205,
+      "WLD_DIV": -0.13827004990338831
+    }
+  },
+  "2020-09": {
+    "signal_month": "2020-09",
+    "holding_month": "2020-10",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.14426455072352962,
+      "WLD_QUAL": 0.04219873830502219,
+      "WLD_VAL": -0.13607461732579718,
+      "WLD_SMALL": -0.013139989364375104,
+      "WLD_DIV": -0.11205809625786955
+    }
+  },
+  "2020-10": {
+    "signal_month": "2020-10",
+    "holding_month": "2020-11",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.1867858037507073,
+      "WLD_QUAL": 0.0956989486538804,
+      "WLD_VAL": -0.09284697795340846,
+      "WLD_SMALL": 0.07034754601012261,
+      "WLD_DIV": -0.0826057853547244
+    }
+  },
+  "2020-11": {
+    "signal_month": "2020-11",
+    "holding_month": "2020-12",
+    "pick": "WLD_SMALL",
+    "cash": false,
+    "ticker": "WSML.L",
+    "name": "World Small Cap",
+    "table": {
+      "WLD_MOM": 0.2903101959154597,
+      "WLD_QUAL": 0.23393909529296142,
+      "WLD_VAL": 0.1453350968218774,
+      "WLD_SMALL": 0.4185532834008736,
+      "WLD_DIV": 0.20176389315351018
+    }
+  },
+  "2020-12": {
+    "signal_month": "2020-12",
+    "holding_month": "2021-01",
+    "pick": "WLD_SMALL",
+    "cash": false,
+    "ticker": "WSML.L",
+    "name": "World Small Cap",
+    "table": {
+      "WLD_MOM": 0.24328686953917078,
+      "WLD_QUAL": 0.17091685456217043,
+      "WLD_VAL": 0.11755089419130305,
+      "WLD_SMALL": 0.3352049372506509,
+      "WLD_DIV": 0.1655703875242307
+    }
+  },
+  "2021-01": {
+    "signal_month": "2021-01",
+    "holding_month": "2021-02",
+    "pick": "WLD_SMALL",
+    "cash": false,
+    "ticker": "WSML.L",
+    "name": "World Small Cap",
+    "table": {
+      "WLD_MOM": 0.1791007543791454,
+      "WLD_QUAL": 0.09019694375077125,
+      "WLD_VAL": 0.09040435871099706,
+      "WLD_SMALL": 0.2667198463126561,
+      "WLD_DIV": 0.10970709011842272
+    }
+  },
+  "2021-02": {
+    "signal_month": "2021-02",
+    "holding_month": "2021-03",
+    "pick": "WLD_SMALL",
+    "cash": false,
+    "ticker": "WSML.L",
+    "name": "World Small Cap",
+    "table": {
+      "WLD_MOM": 0.09055515377858958,
+      "WLD_QUAL": 0.07694333365531958,
+      "WLD_VAL": 0.11891013556270313,
+      "WLD_SMALL": 0.25820632576711144,
+      "WLD_DIV": 0.10342380131822937
+    }
+  },
+  "2021-03": {
+    "signal_month": "2021-03",
+    "holding_month": "2021-04",
+    "pick": "WLD_SMALL",
+    "cash": false,
+    "ticker": "WSML.L",
+    "name": "World Small Cap",
+    "table": {
+      "WLD_MOM": 0.10316265500101918,
+      "WLD_QUAL": 0.1687831095059078,
+      "WLD_VAL": 0.3124246347062065,
+      "WLD_SMALL": 0.337221997102646,
+      "WLD_DIV": 0.2408951022479613
+    }
+  },
+  "2021-04": {
+    "signal_month": "2021-04",
+    "holding_month": "2021-05",
+    "pick": "WLD_SMALL",
+    "cash": false,
+    "ticker": "WSML.L",
+    "name": "World Small Cap",
+    "table": {
+      "WLD_MOM": 0.10983777342307044,
+      "WLD_QUAL": 0.1446977048320559,
+      "WLD_VAL": 0.2557743646240094,
+      "WLD_SMALL": 0.31836630997179327,
+      "WLD_DIV": 0.20586171459273928
+    }
+  },
+  "2021-05": {
+    "signal_month": "2021-05",
+    "holding_month": "2021-06",
+    "pick": "WLD_SMALL",
+    "cash": false,
+    "ticker": "WSML.L",
+    "name": "World Small Cap",
+    "table": {
+      "WLD_MOM": 0.0600726329865906,
+      "WLD_QUAL": 0.13708368688544947,
+      "WLD_VAL": 0.2666402960200678,
+      "WLD_SMALL": 0.2786548447617252,
+      "WLD_DIV": 0.22314923892073235
+    }
+  },
+  "2021-06": {
+    "signal_month": "2021-06",
+    "holding_month": "2021-07",
+    "pick": "WLD_VAL",
+    "cash": false,
+    "ticker": "IWVL.L",
+    "name": "World Value",
+    "table": {
+      "WLD_MOM": 0.14124956018899582,
+      "WLD_QUAL": 0.23090329486462657,
+      "WLD_VAL": 0.32610456551382616,
+      "WLD_SMALL": 0.32271730449727154,
+      "WLD_DIV": 0.2714943482590164
+    }
+  },
+  "2021-07": {
+    "signal_month": "2021-07",
+    "holding_month": "2021-08",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": 0.09353527041724563,
+      "WLD_QUAL": 0.1693267310789266,
+      "WLD_VAL": 0.15933776091014473,
+      "WLD_SMALL": 0.16606171337926945,
+      "WLD_DIV": 0.12122158258704396
+    }
+  },
+  "2021-08": {
+    "signal_month": "2021-08",
+    "holding_month": "2021-09",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": 0.11291795679910055,
+      "WLD_QUAL": 0.196612284466112,
+      "WLD_VAL": 0.16211477852055367,
+      "WLD_SMALL": 0.1505057214076604,
+      "WLD_DIV": 0.13383220681981456
+    }
+  },
+  "2021-09": {
+    "signal_month": "2021-09",
+    "holding_month": "2021-10",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": 0.09982919309654092,
+      "WLD_QUAL": 0.1835520009746443,
+      "WLD_VAL": 0.16176513802438164,
+      "WLD_SMALL": 0.1298263989070223,
+      "WLD_DIV": 0.13183727743197204
+    }
+  },
+  "2021-10": {
+    "signal_month": "2021-10",
+    "holding_month": "2021-11",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": 0.17269217693149086,
+      "WLD_QUAL": 0.21795183665328133,
+      "WLD_VAL": 0.09290353710713006,
+      "WLD_SMALL": 0.11108908789671323,
+      "WLD_DIV": 0.10175034233923697
+    }
+  },
+  "2021-11": {
+    "signal_month": "2021-11",
+    "holding_month": "2021-12",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": 0.1602440970506971,
+      "WLD_QUAL": 0.17891857887219742,
+      "WLD_VAL": 0.0177521366758433,
+      "WLD_SMALL": 0.05763143124598824,
+      "WLD_DIV": 0.04187809933853859
+    }
+  },
+  "2021-12": {
+    "signal_month": "2021-12",
+    "holding_month": "2022-01",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": 0.10006100542773266,
+      "WLD_QUAL": 0.16290162963938215,
+      "WLD_VAL": 0.07875911599400398,
+      "WLD_SMALL": 0.04819295442524396,
+      "WLD_DIV": 0.08626895040753402
+    }
+  },
+  "2022-01": {
+    "signal_month": "2022-01",
+    "holding_month": "2022-02",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": 0.04297284143293645,
+      "WLD_QUAL": 0.07834562596763828,
+      "WLD_VAL": 0.0619181088543137,
+      "WLD_SMALL": -0.02006221208000325,
+      "WLD_DIV": 0.13984957678383747
+    }
+  },
+  "2022-02": {
+    "signal_month": "2022-02",
+    "holding_month": "2022-03",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": -0.002994824080983949,
+      "WLD_QUAL": 0.01454527983945586,
+      "WLD_VAL": 0.05598783862159529,
+      "WLD_SMALL": -0.02589949597501995,
+      "WLD_DIV": 0.1412621064226871
+    }
+  },
+  "2022-03": {
+    "signal_month": "2022-03",
+    "holding_month": "2022-04",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": 0.06232817537981017,
+      "WLD_QUAL": 0.051339638085332595,
+      "WLD_VAL": 0.09041257393821112,
+      "WLD_SMALL": 0.016213563703969314,
+      "WLD_DIV": 0.19229129968787162
+    }
+  },
+  "2022-04": {
+    "signal_month": "2022-04",
+    "holding_month": "2022-05",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": -0.0421855676798194,
+      "WLD_QUAL": -0.01328483268045566,
+      "WLD_VAL": 0.06216457829740252,
+      "WLD_SMALL": -0.03886088358973583,
+      "WLD_DIV": 0.19049094239892406
+    }
+  },
+  "2022-05": {
+    "signal_month": "2022-05",
+    "holding_month": "2022-06",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": -0.07175956316299237,
+      "WLD_QUAL": -0.022663268939854042,
+      "WLD_VAL": 0.060753984038435904,
+      "WLD_SMALL": -0.07195011872734347,
+      "WLD_DIV": 0.24646624203674894
+    }
+  },
+  "2022-06": {
+    "signal_month": "2022-06",
+    "holding_month": "2022-07",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": -0.13922047345966648,
+      "WLD_QUAL": -0.09750479719485106,
+      "WLD_VAL": 0.019243795120864604,
+      "WLD_SMALL": -0.1309633782554479,
+      "WLD_DIV": 0.17727575321745115
+    }
+  },
+  "2022-07": {
+    "signal_month": "2022-07",
+    "holding_month": "2022-08",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": -0.11233447527044005,
+      "WLD_QUAL": -0.05976540476623071,
+      "WLD_VAL": 0.03847097732112226,
+      "WLD_SMALL": -0.04721456829522053,
+      "WLD_DIV": 0.17867957561006564
+    }
+  },
+  "2022-08": {
+    "signal_month": "2022-08",
+    "holding_month": "2022-09",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": -0.08651579440023327,
+      "WLD_QUAL": -0.0734531483106462,
+      "WLD_VAL": -0.004020793684129442,
+      "WLD_SMALL": -0.0481979730440818,
+      "WLD_DIV": 0.139056884408151
+    }
+  },
+  "2022-09": {
+    "signal_month": "2022-09",
+    "holding_month": "2022-10",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": -0.03590144045438037,
+      "WLD_QUAL": -0.045197642658781345,
+      "WLD_VAL": -0.05417911071991244,
+      "WLD_SMALL": -0.023074827052045555,
+      "WLD_DIV": 0.038289083545695046
+    }
+  },
+  "2022-10": {
+    "signal_month": "2022-10",
+    "holding_month": "2022-11",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": 0.020106428001992693,
+      "WLD_QUAL": -0.013385314921317004,
+      "WLD_VAL": -0.021168011846073087,
+      "WLD_SMALL": -0.016145859344473656,
+      "WLD_DIV": 0.0848228010417349
+    }
+  },
+  "2022-11": {
+    "signal_month": "2022-11",
+    "holding_month": "2022-12",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": -0.03836029993475665,
+      "WLD_QUAL": -0.03779553380551015,
+      "WLD_VAL": 0.004003814103290315,
+      "WLD_SMALL": -0.03145878233537558,
+      "WLD_DIV": 0.0888574507504869
+    }
+  },
+  "2022-12": {
+    "signal_month": "2022-12",
+    "holding_month": "2023-01",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": -0.007046264772253785,
+      "WLD_QUAL": -0.04367739558262784,
+      "WLD_VAL": -0.007526885194638511,
+      "WLD_SMALL": -0.04121280966137275,
+      "WLD_DIV": 0.08522596217362155
+    }
+  },
+  "2023-01": {
+    "signal_month": "2023-01",
+    "holding_month": "2023-02",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": 0.016258455541566352,
+      "WLD_QUAL": 0.028300208546072625,
+      "WLD_VAL": 0.02262741239060939,
+      "WLD_SMALL": 0.05444273904781616,
+      "WLD_DIV": 0.07861669447016562
+    }
+  },
+  "2023-02": {
+    "signal_month": "2023-02",
+    "holding_month": "2023-03",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": 0.051666081064224434,
+      "WLD_QUAL": 0.08295552832161679,
+      "WLD_VAL": 0.10082780240450351,
+      "WLD_SMALL": 0.13468748414479093,
+      "WLD_DIV": 0.1500115326645235
+    }
+  },
+  "2023-03": {
+    "signal_month": "2023-03",
+    "holding_month": "2023-04",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": -0.006690924615945115,
+      "WLD_QUAL": 0.019570478263310598,
+      "WLD_VAL": 0.052474093609024,
+      "WLD_SMALL": -0.008689032446980383,
+      "WLD_DIV": 0.0950833214405915
+    }
+  },
+  "2023-04": {
+    "signal_month": "2023-04",
+    "holding_month": "2023-05",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": -0.015093065349072177,
+      "WLD_QUAL": 0.026085094628714334,
+      "WLD_VAL": 0.043420811432249184,
+      "WLD_SMALL": -0.033511708626079995,
+      "WLD_DIV": 0.08881512093752297
+    }
+  },
+  "2023-05": {
+    "signal_month": "2023-05",
+    "holding_month": "2023-06",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": -0.030583521078205056,
+      "WLD_QUAL": 0.07233654847843884,
+      "WLD_VAL": 0.07108509239992711,
+      "WLD_SMALL": -0.009720088614514233,
+      "WLD_DIV": 0.07652263764884171
+    }
+  },
+  "2023-06": {
+    "signal_month": "2023-06",
+    "holding_month": "2023-07",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": -0.028714993009569256,
+      "WLD_QUAL": 0.1019960370045041,
+      "WLD_VAL": 0.0946433841171812,
+      "WLD_SMALL": 0.0165299104613692,
+      "WLD_DIV": 0.05949923939526025
+    }
+  },
+  "2023-07": {
+    "signal_month": "2023-07",
+    "holding_month": "2023-08",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": -0.036238908223925725,
+      "WLD_QUAL": 0.0841737025547511,
+      "WLD_VAL": 0.06716344839953114,
+      "WLD_SMALL": 0.03222087580383404,
+      "WLD_DIV": 0.04079318607462201
+    }
+  },
+  "2023-08": {
+    "signal_month": "2023-08",
+    "holding_month": "2023-09",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": -0.012117194023721245,
+      "WLD_QUAL": 0.11398516005843917,
+      "WLD_VAL": 0.06580878140982582,
+      "WLD_SMALL": 0.03871101797230825,
+      "WLD_DIV": 0.004350233756960531
+    }
+  },
+  "2023-09": {
+    "signal_month": "2023-09",
+    "holding_month": "2023-10",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": 0.0043662945008777765,
+      "WLD_QUAL": 0.07630741216078141,
+      "WLD_VAL": 0.05028924748702002,
+      "WLD_SMALL": -0.034467795096717935,
+      "WLD_DIV": -0.000854472267857953
+    }
+  },
+  "2023-10": {
+    "signal_month": "2023-10",
+    "holding_month": "2023-11",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": -0.01222619751565257,
+      "WLD_QUAL": 0.049672515168106335,
+      "WLD_VAL": -0.007183546548220288,
+      "WLD_SMALL": -0.10740938538123057,
+      "WLD_DIV": -0.03667285440376289
+    }
+  },
+  "2023-11": {
+    "signal_month": "2023-11",
+    "holding_month": "2023-12",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": 0.05263092185399998,
+      "WLD_QUAL": 0.08933049074096466,
+      "WLD_VAL": 0.047346175838860916,
+      "WLD_SMALL": -0.012813343945855205,
+      "WLD_DIV": 0.036629384932937104
+    }
+  },
+  "2023-12": {
+    "signal_month": "2023-12",
+    "holding_month": "2024-01",
+    "pick": "WLD_QUAL",
+    "cash": false,
+    "ticker": "IWQU.L",
+    "name": "World Quality",
+    "table": {
+      "WLD_MOM": 0.08204991341925383,
+      "WLD_QUAL": 0.1333063388457083,
+      "WLD_VAL": 0.09989098753861714,
+      "WLD_SMALL": 0.09779811058456067,
+      "WLD_DIV": 0.07707717553503857
+    }
+  },
+  "2024-01": {
+    "signal_month": "2024-01",
+    "holding_month": "2024-02",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.1936721730473907,
+      "WLD_QUAL": 0.15626561958441987,
+      "WLD_VAL": 0.13045238744265153,
+      "WLD_SMALL": 0.1022251242717025,
+      "WLD_DIV": 0.12916616149450566
+    }
+  },
+  "2024-02": {
+    "signal_month": "2024-02",
+    "holding_month": "2024-03",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.23776048976085118,
+      "WLD_QUAL": 0.16469092786717798,
+      "WLD_VAL": 0.08705068884643308,
+      "WLD_SMALL": 0.07140716738459263,
+      "WLD_DIV": 0.10049288623327302
+    }
+  },
+  "2024-03": {
+    "signal_month": "2024-03",
+    "holding_month": "2024-04",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.29711313050361987,
+      "WLD_QUAL": 0.18694963427200628,
+      "WLD_VAL": 0.1264070901129526,
+      "WLD_SMALL": 0.09151274292248512,
+      "WLD_DIV": 0.1219893638371905
+    }
+  },
+  "2024-04": {
+    "signal_month": "2024-04",
+    "holding_month": "2024-05",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.25801579128984775,
+      "WLD_QUAL": 0.15373598166082636,
+      "WLD_VAL": 0.10559822737182101,
+      "WLD_SMALL": 0.06690394633690122,
+      "WLD_DIV": 0.13687507832940882
+    }
+  },
+  "2024-05": {
+    "signal_month": "2024-05",
+    "holding_month": "2024-06",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.2891693900396137,
+      "WLD_QUAL": 0.18878008951913383,
+      "WLD_VAL": 0.0919712817493532,
+      "WLD_SMALL": 0.09770475123467515,
+      "WLD_DIV": 0.12976335213850776
+    }
+  },
+  "2024-06": {
+    "signal_month": "2024-06",
+    "holding_month": "2024-07",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.395443733065751,
+      "WLD_QUAL": 0.2666681204538697,
+      "WLD_VAL": 0.13441891417549945,
+      "WLD_SMALL": 0.1672951584532294,
+      "WLD_DIV": 0.1411668318836048
+    }
+  },
+  "2024-07": {
+    "signal_month": "2024-07",
+    "holding_month": "2024-08",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.28811904115846976,
+      "WLD_QUAL": 0.19652994055379636,
+      "WLD_VAL": 0.12906228625334681,
+      "WLD_SMALL": 0.17649791696199868,
+      "WLD_DIV": 0.14324681725386368
+    }
+  },
+  "2024-08": {
+    "signal_month": "2024-08",
+    "holding_month": "2024-09",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.21874912688022063,
+      "WLD_QUAL": 0.1413474329630342,
+      "WLD_VAL": 0.04974685429464887,
+      "WLD_SMALL": 0.03881408430337174,
+      "WLD_DIV": 0.07537827880613102
+    }
+  },
+  "2024-09": {
+    "signal_month": "2024-09",
+    "holding_month": "2024-10",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.15994528893728477,
+      "WLD_QUAL": 0.11081080408487853,
+      "WLD_VAL": 0.04175061580199091,
+      "WLD_SMALL": 0.07164294997224863,
+      "WLD_DIV": 0.08256581551291498
+    }
+  },
+  "2024-10": {
+    "signal_month": "2024-10",
+    "holding_month": "2024-11",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.09728260249642973,
+      "WLD_QUAL": 0.07141877020110798,
+      "WLD_VAL": 0.027785026283349,
+      "WLD_SMALL": 0.055767069693642535,
+      "WLD_DIV": 0.0930276369643106
+    }
+  },
+  "2024-11": {
+    "signal_month": "2024-11",
+    "holding_month": "2024-12",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.10545310295613652,
+      "WLD_QUAL": 0.09289977066393207,
+      "WLD_VAL": 0.007688503651703815,
+      "WLD_SMALL": 0.09367132243183418,
+      "WLD_DIV": 0.05977779360654445
+    }
+  },
+  "2024-12": {
+    "signal_month": "2024-12",
+    "holding_month": "2025-01",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.12946321181079523,
+      "WLD_QUAL": 0.10263582496583434,
+      "WLD_VAL": 0.024524438907039148,
+      "WLD_SMALL": 0.08992287371864216,
+      "WLD_DIV": 0.05681941542205804
+    }
+  },
+  "2025-01": {
+    "signal_month": "2025-01",
+    "holding_month": "2025-02",
+    "pick": "WLD_MOM",
+    "cash": false,
+    "ticker": "IWMO.L",
+    "name": "World Momentum",
+    "table": {
+      "WLD_MOM": 0.17091513149360593,
+      "WLD_QUAL": 0.12312254619822971,
+      "WLD_VAL": 0.06647299901034276,
+      "WLD_SMALL": 0.12603781630155675,
+      "WLD_DIV": 0.10130582519265863
+    }
+  },
+  "2025-02": {
+    "signal_month": "2025-02",
+    "holding_month": "2025-03",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": 0.06555220092146885,
+      "WLD_QUAL": 0.038349110982913714,
+      "WLD_VAL": 0.08500437961625518,
+      "WLD_SMALL": 0.06452986937201621,
+      "WLD_DIV": 0.15972781557038407
+    }
+  },
+  "2025-03": {
+    "signal_month": "2025-03",
+    "holding_month": "2025-04",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": 0.01808142165828186,
+      "WLD_QUAL": -0.01993198243418326,
+      "WLD_VAL": 0.027483566426175443,
+      "WLD_SMALL": -0.053743709454512345,
+      "WLD_DIV": 0.1245980478109181
+    }
+  },
+  "2025-04": {
+    "signal_month": "2025-04",
+    "holding_month": "2025-05",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": 0.02388277644220249,
+      "WLD_QUAL": -0.05551821803720147,
+      "WLD_VAL": 0.020153847584227336,
+      "WLD_SMALL": -0.05598293861350323,
+      "WLD_DIV": 0.10346456473827281
+    }
+  },
+  "2025-05": {
+    "signal_month": "2025-05",
+    "holding_month": "2025-06",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": 0.09159456334854243,
+      "WLD_QUAL": -0.0108085745567702,
+      "WLD_VAL": 0.06349317093528661,
+      "WLD_SMALL": -0.011895870896800553,
+      "WLD_DIV": 0.12648374944064877
+    }
+  },
+  "2025-06": {
+    "signal_month": "2025-06",
+    "holding_month": "2025-07",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": 0.08174765885053925,
+      "WLD_QUAL": -0.00668912370304342,
+      "WLD_VAL": 0.0899540194571502,
+      "WLD_SMALL": 0.010473839610746438,
+      "WLD_DIV": 0.12124334432481687
+    }
+  },
+  "2025-07": {
+    "signal_month": "2025-07",
+    "holding_month": "2025-08",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": 0.05433055155780053,
+      "WLD_QUAL": -0.018836747451296598,
+      "WLD_VAL": 0.08334679206786677,
+      "WLD_SMALL": -0.020047599453275722,
+      "WLD_DIV": 0.13574594443124277
+    }
+  },
+  "2025-08": {
+    "signal_month": "2025-08",
+    "holding_month": "2025-09",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": 0.05621501315971855,
+      "WLD_QUAL": 0.0009099463004567099,
+      "WLD_VAL": 0.14338421437594762,
+      "WLD_SMALL": 0.0553808064899175,
+      "WLD_DIV": 0.17774404604330796
+    }
+  },
+  "2025-09": {
+    "signal_month": "2025-09",
+    "holding_month": "2025-10",
+    "pick": "WLD_VAL",
+    "cash": false,
+    "ticker": "IWVL.L",
+    "name": "World Value",
+    "table": {
+      "WLD_MOM": 0.04415397579045455,
+      "WLD_QUAL": -0.01121820817568353,
+      "WLD_VAL": 0.12292652543149085,
+      "WLD_SMALL": 0.02401869639677856,
+      "WLD_DIV": 0.12255945678898872
+    }
+  },
+  "2025-10": {
+    "signal_month": "2025-10",
+    "holding_month": "2025-11",
+    "pick": "WLD_VAL",
+    "cash": false,
+    "ticker": "IWVL.L",
+    "name": "World Value",
+    "table": {
+      "WLD_MOM": 0.10693285965147314,
+      "WLD_QUAL": 0.059272318855106754,
+      "WLD_VAL": 0.17480736308155498,
+      "WLD_SMALL": 0.11870823057858648,
+      "WLD_DIV": 0.12067323849309997
+    }
+  },
+  "2025-11": {
+    "signal_month": "2025-11",
+    "holding_month": "2025-12",
+    "pick": "WLD_VAL",
+    "cash": false,
+    "ticker": "IWVL.L",
+    "name": "World Value",
+    "table": {
+      "WLD_MOM": 0.19050592199780092,
+      "WLD_QUAL": 0.14443711838738205,
+      "WLD_VAL": 0.23680766511934337,
+      "WLD_SMALL": 0.21053290442245198,
+      "WLD_DIV": 0.15688181972200566
+    }
+  },
+  "2025-12": {
+    "signal_month": "2025-12",
+    "holding_month": "2026-01",
+    "pick": "WLD_VAL",
+    "cash": false,
+    "ticker": "IWVL.L",
+    "name": "World Value",
+    "table": {
+      "WLD_MOM": 0.19683849164499123,
+      "WLD_QUAL": 0.18480773771429337,
+      "WLD_VAL": 0.3033068955566627,
+      "WLD_SMALL": 0.24209672988086695,
+      "WLD_DIV": 0.22040287063870578
+    }
+  },
+  "2026-01": {
+    "signal_month": "2026-01",
+    "holding_month": "2026-02",
+    "pick": "WLD_VAL",
+    "cash": false,
+    "ticker": "IWVL.L",
+    "name": "World Value",
+    "table": {
+      "WLD_MOM": 0.1247296383905252,
+      "WLD_QUAL": 0.13990390052799162,
+      "WLD_VAL": 0.30513309481807815,
+      "WLD_SMALL": 0.20767505215931625,
+      "WLD_DIV": 0.21801252139725769
+    }
+  },
+  "2026-02": {
+    "signal_month": "2026-02",
+    "holding_month": "2026-03",
+    "pick": "WLD_VAL",
+    "cash": false,
+    "ticker": "IWVL.L",
+    "name": "World Value",
+    "table": {
+      "WLD_MOM": 0.13384514400078795,
+      "WLD_QUAL": 0.1647174987164275,
+      "WLD_VAL": 0.35920437077226497,
+      "WLD_SMALL": 0.24807361544094841,
+      "WLD_DIV": 0.30352142837609075
+    }
+  },
+  "2026-03": {
+    "signal_month": "2026-03",
+    "holding_month": "2026-04",
+    "pick": "WLD_DIV",
+    "cash": false,
+    "ticker": "TDGB.L",
+    "name": "Dividend Leaders",
+    "table": {
+      "WLD_MOM": 0.01821712614506721,
+      "WLD_QUAL": 0.05500089905272487,
+      "WLD_VAL": 0.23567532734809182,
+      "WLD_SMALL": 0.11096284786513544,
+      "WLD_DIV": 0.24420543902686132
+    }
+  },
+  "2026-04": {
+    "signal_month": "2026-04",
+    "holding_month": "2026-05",
+    "pick": "WLD_VAL",
+    "cash": false,
+    "ticker": "IWVL.L",
+    "name": "World Value",
+    "table": {
+      "WLD_MOM": 0.17812191489942908,
+      "WLD_QUAL": 0.12155112236229249,
+      "WLD_VAL": 0.3311309234952089,
+      "WLD_SMALL": 0.15891031940676204,
+      "WLD_DIV": 0.21358454089817935
+    }
+  },
+  "2026-05": {
+    "signal_month": "2026-05",
+    "holding_month": "2026-06",
+    "pick": "WLD_VAL",
+    "cash": false,
+    "ticker": "IWVL.L",
+    "name": "World Value",
+    "table": {
+      "WLD_MOM": 0.2147401854162143,
+      "WLD_QUAL": 0.1283288728289247,
+      "WLD_VAL": 0.4793441152654332,
+      "WLD_SMALL": 0.18771397087186514,
+      "WLD_DIV": 0.19233218904229687
+    }
+  },
+  "2026-06": {
+    "signal_month": "2026-06",
+    "holding_month": "2026-07",
+    "pick": "WLD_VAL",
+    "cash": false,
+    "ticker": "IWVL.L",
+    "name": "World Value",
+    "table": {
+      "WLD_MOM": 0.28470771959876373,
+      "WLD_QUAL": 0.11771875773775364,
+      "WLD_VAL": 0.4013783427394788,
+      "WLD_SMALL": 0.1918617698242986,
+      "WLD_DIV": 0.15850946414496625
+    }
+  },
+  "2026-07": {
+    "signal_month": "2026-07",
+    "holding_month": "2026-08",
+    "pick": "WLD_VAL",
+    "cash": false,
+    "ticker": "IWVL.L",
+    "name": "World Value",
+    "table": {
+      "WLD_MOM": 0.15926363865961757,
+      "WLD_QUAL": 0.09662172177674333,
+      "WLD_VAL": 0.3275000539036699,
+      "WLD_SMALL": 0.12680132531094657,
+      "WLD_DIV": 0.17682656419234943
+    }
+  },
+  "2026-08": {
+    "signal_month": "2026-08",
+    "holding_month": "2026-09",
+    "pick": "WLD_VAL",
+    "cash": false,
+    "ticker": "IWVL.L",
+    "name": "World Value",
+    "table": {
+      "WLD_MOM": 0.1744920986054892,
+      "WLD_QUAL": 0.12781719464663066,
+      "WLD_VAL": 0.35207764467862734,
+      "WLD_SMALL": 0.16945187593941635,
+      "WLD_DIV": 0.15599509103251452
+    }
+  },
+  "2026-09": {
+    "signal_month": "2026-09",
+    "holding_month": "2026-10",
+    "pick": "WLD_VAL",
+    "cash": false,
+    "ticker": "IWVL.L",
+    "name": "World Value",
+    "table": {
+      "WLD_MOM": 0.23373048138747277,
+      "WLD_QUAL": 0.135222851643239,
+      "WLD_VAL": 0.32376728868740545,
+      "WLD_SMALL": 0.11474571986180182,
+      "WLD_DIV": 0.10820360722114719
+    }
+  }
+}

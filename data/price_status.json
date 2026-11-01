@@ -1,0 +1,27 @@
+{
+  "expected": "2026-10",
+  "performanceThrough": "2026-10",
+  "inputs": {
+    "WLD_MOM": {
+      "status": "ok",
+      "last": "2026-10"
+    },
+    "WLD_QUAL": {
+      "status": "ok",
+      "last": "2026-10"
+    },
+    "WLD_VAL": {
+      "status": "ok",
+      "last": "2026-10"
+    },
+    "WLD_SMALL": {
+      "status": "ok",
+      "last": "2026-10"
+    },
+    "WLD_DIV": {
+      "status": "ok",
+      "last": "2026-10"
+    }
+  },
+  "missing": []
+}
