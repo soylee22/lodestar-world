@@ -9,7 +9,12 @@ from pathlib import Path
 import re
 
 HERE = Path(__file__).resolve().parent
-SRC_HTML = HERE / "index.html.bak"
+if (HERE / "index.html.template").is_file():
+    SRC_HTML = HERE / "index.html.template"
+elif (HERE / "index.html.bak").is_file():
+    SRC_HTML = HERE / "index.html.bak"
+else:
+    SRC_HTML = HERE / "index.html"
 OUT_HTML = HERE / "index.html"
 
 raw_html = SRC_HTML.read_text(encoding="utf-8")
