@@ -2,7 +2,7 @@
 """Last Year's Winner (LYW) data and calculation engine.
 
 Parses 29-year historical backtest (1997-2025), tracks live 2026 holding (SNDK)
-with 35% trailing stop-loss, and evaluates 2027 candidate race.
+with fixed 35% entry stop-loss, and evaluates 2027 candidate race.
 """
 
 from __future__ import annotations
@@ -117,7 +117,7 @@ def build_lyw_data() -> dict:
     except Exception:
         pass
 
-    stop_price_2026 = round(peak_price_2026 * (1.0 - 0.35), 2)
+    stop_price_2026 = round(entry_price_2026 * (1.0 - 0.35), 2)
     buffer_dollars = round(cur_price_2026 - stop_price_2026, 2)
     buffer_pct = round((buffer_dollars / stop_price_2026) * 100.0, 1)
     is_stopped_2026 = cur_price_2026 <= stop_price_2026
@@ -299,7 +299,7 @@ def build_lyw_data() -> dict:
     return {
         "meta": {
             "name": "Last Year's Winner",
-            "strapline": "S&P 500 #1 Momentum Rotation with 35% Trailing Stop-Loss",
+            "strapline": "S&P 500 #1 Momentum Rotation with Fixed 35% Entry Stop-Loss",
             "holdingYear": 2026,
             "asof": date.today().isoformat(),
         },

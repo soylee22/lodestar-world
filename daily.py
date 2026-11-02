@@ -232,7 +232,7 @@ def main():
             f"• S&amp;P 500 Cash Gate: <b>{gate_status}</b> ({spx_chg_val:+.1f}% vs 19m ago, limit {CASH_THRESHOLD*100:.0f}%)\n\n"
             f"<b>🎯 LAST YEAR'S WINNER (50% Sleeve)</b>\n"
             f"• Active 2026 Holding: <b>{lp.get('ticker', 'SNDK')}</b> (${lp.get('currentPrice', 0):.2f})\n"
-            f"• 35% Trailing Stop: <b>${lp.get('stopLossPrice', 0):.2f}</b> ({lp.get('statusLabel', 'Untouched')})\n"
+            f"• 35% Fixed Entry Stop: <b>${lp.get('stopLossPrice', 0):.2f}</b> ({lp.get('statusLabel', 'Untouched')})\n"
             f"• 2027 Leader: <b>{leader.get('ticker', 'MRNA')}</b> ({leader.get('ytd', 0):+.1f}% YTD)\n"
             f"• 2027 Contenders: {contenders_str}\n\n"
             f"<b>📊 Live Dashboard &amp; Interactive Charts:</b>\n"
