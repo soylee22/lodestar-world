@@ -6,12 +6,10 @@ on:
     paths:
       - '.github/workflows/monthly.yml'
       - 'pipeline/**'
-      - 'tests/**'
       - 'build_data.py'
       - 'run_monthly.py'
       - 'requirements.txt'
       - 'universe.py'
-      - 'index.html'
   schedule:
     # Refresh daily so delayed month-end prices are picked up after the 5th too.
     # Signals are archived. Alerts remain once per signal month.
@@ -47,9 +45,6 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Check the signal and book regressions
-        run: # python -m unittest discover -s tests
-
       - name: Recompute signal and rebuild the page
         env:
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
@@ -67,7 +62,7 @@ jobs:
         run: |
           git config user.name  "soylee22"
           git config user.email "leeslater1992@gmail.com"
-          git add data.js data/panel_local.csv data/last_alert.json data/holdings.json data/signal_history.json data/fund_prices_gbp.csv data/track_record.csv data/price_status.json data/company_logos.json assets/company-logos
+          git add -A
           if git diff --staged --quiet; then
             echo "nothing changed"
           else
