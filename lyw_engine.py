@@ -120,7 +120,32 @@ def build_lyw_data() -> dict:
     stop_price_2026 = round(entry_price_2026 * (1.0 - 0.35), 2)
     buffer_dollars = round(cur_price_2026 - stop_price_2026, 2)
     buffer_pct = round((buffer_dollars / stop_price_2026) * 100.0, 1)
+    fall_to_stop_pct = round((1.0 - stop_price_2026 / cur_price_2026) * 100.0, 1) if cur_price_2026 > 0 else 0.0
     is_stopped_2026 = cur_price_2026 <= stop_price_2026
+
+    # Valuation vs SPY benchmark
+    fx_rate = 1.33
+    spy_price = 770.0
+    try:
+        fx_t = yf.Ticker("GBPUSD=X").fast_info.last_price
+        if fx_t and fx_t > 0:
+            fx_rate = float(fx_t)
+        spy_t = yf.Ticker("SPY").fast_info.last_price
+        if spy_t and spy_t > 0:
+            spy_price = float(spy_t)
+    except Exception:
+        pass
+
+    sndk_shares = 0.8481779
+    spy_shares = 1.6983917
+    val_gbp = round(sndk_shares * cur_price_2026 / fx_rate, 2)
+    net_pnl_gbp = round(val_gbp - 1000.0, 2)
+    net_return_pct = round((val_gbp / 1000.0 - 1.0) * 100.0, 2)
+    spy_val_gbp = round(spy_shares * spy_price / fx_rate, 2)
+    spy_return_pct = round((spy_val_gbp / 1000.0 - 1.0) * 100.0, 2)
+    diff_vs_spy_gbp = round(val_gbp - spy_val_gbp, 2)
+    drawdown_from_entry = round((cur_price_2026 / entry_price_2026 - 1.0) * 100.0, 2)
+    drawdown_from_peak = round((cur_price_2026 / peak_price_2026 - 1.0) * 100.0, 2)
 
     live_position = {
         "holdingYear": 2026,
@@ -129,7 +154,8 @@ def build_lyw_data() -> dict:
         "broker": "Trading 212",
         "investedGbp": 998.50,
         "investedUsd": 1557.71,
-        "entryDate": "12 Oct 2026",
+        "shares": sndk_shares,
+        "entryDate": "12 Oct 2026, 11:47 BST",
         "entryPrice": entry_price_2026,
         "currentPrice": cur_price_2026,
         "peakPrice": peak_price_2026,
@@ -137,6 +163,17 @@ def build_lyw_data() -> dict:
         "stopLossPrice": stop_price_2026,
         "bufferPercent": buffer_pct,
         "bufferDollars": buffer_dollars,
+        "fallToStopPct": fall_to_stop_pct,
+        "drawdownFromEntry": drawdown_from_entry,
+        "drawdownFromPeak": drawdown_from_peak,
+        "fxRate": round(fx_rate, 4),
+        "valuationGbp": val_gbp,
+        "netPnlGbp": net_pnl_gbp,
+        "netReturnPct": net_return_pct,
+        "spyPrice": round(spy_price, 2),
+        "spyValuationGbp": spy_val_gbp,
+        "spyReturnPct": spy_return_pct,
+        "diffVsSpyGbp": diff_vs_spy_gbp,
         "isStopped": is_stopped_2026,
         "statusLabel": "STOPPED OUT · IN CASH" if is_stopped_2026 else f"STOP UNTOUCHED (+{buffer_pct}% BUFFER)",
         "statusClass": "red" if is_stopped_2026 else "green",

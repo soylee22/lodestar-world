@@ -12,15 +12,15 @@ GMAIL_USER = os.environ.get("GMAIL_USER", "leeslater1992@gmail.com")
 MAIL_TO = os.environ.get("MAIL_TO", "leeslater1992@gmail.com")
 
 
-def email(subject: str, plain: str, html: str | None = None) -> bool:
+def email(subject: str, plain: str, html: str | None = None, sender_name: str = "Lodestar World") -> bool:
     pw = os.environ.get("GMAIL_APP_PASSWORD")
     if not pw:
-        print(f"[mailer] no GMAIL_APP_PASSWORD set; would send '{subject}':\n"
+        print(f"[mailer] no GMAIL_APP_PASSWORD set; would send '{subject}' from '{sender_name}':\n"
               + "-" * 50 + "\n" + plain[:1500] + "\n" + "-" * 50)
         return False
     msg = EmailMessage()
     msg["Subject"] = subject
-    msg["From"] = f"Lodestar <{GMAIL_USER}>"
+    msg["From"] = f"{sender_name} <{GMAIL_USER}>"
     msg["To"] = MAIL_TO
     msg.set_content(plain)
     if html:
@@ -29,7 +29,7 @@ def email(subject: str, plain: str, html: str | None = None) -> bool:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=30) as smtp:
             smtp.login(GMAIL_USER, pw.replace(" ", ""))
             smtp.send_message(msg)
-        print(f"[mailer] sent '{subject}' to {MAIL_TO}")
+        print(f"[mailer] sent '{subject}' to {MAIL_TO} from {sender_name}")
         return True
     except Exception as e:
         print("[mailer] send failed:", e)

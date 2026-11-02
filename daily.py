@@ -30,6 +30,7 @@ sys.path.insert(0, str(HERE))
 from universe import FACTOR_NAMES, TRADABLE  # noqa: E402
 from notify import telegram  # noqa: E402
 from mailer import email     # noqa: E402
+from email_templates import build_lodestar_world_email, build_lyw_email  # noqa: E402
 
 LOOKBACK = 8
 CASH_LOOKBACK = 19
@@ -204,14 +205,63 @@ def main():
     print("\nRebuilding index.html frontend...")
     subprocess.run([sys.executable, str(HERE / "build_frontend.py")], check=True)
 
-    # Dispatch clean consolidated Telegram daily briefing
-    try:
-        from lyw_engine import build_lyw_data
-        lyw = build_lyw_data()
-        lp = lyw.get("livePosition", {})
-        r27 = lyw.get("race2027", [])
-        leader = r27[0] if r27 else {}
+    # Load holding and strategy data for dispatches
+    from lyw_engine import build_lyw_data
+    lyw = build_lyw_data()
+    lp = lyw.get("livePosition", {})
+    r27 = lyw.get("race2027", [])
+    leader = r27[0] if r27 else {}
 
+    sig_path = DATA / "signal.json"
+    sig = json.loads(sig_path.read_text(encoding="utf-8")) if sig_path.is_file() else {}
+    holding_ticker = sig.get("ticker", "IWVL.L")
+    holding_name = sig.get("name", "World Value")
+    holding_month = sig.get("holding_month", "2026-11")
+    is_change = (ranks[0]["ticker"] != holding_ticker)
+
+    signal_date = date(now.year + (now.month == 12), now.month % 12 + 1, 1)
+    days_to_rebalance = (signal_date - date.today()).days
+    days_to_year_end = (date(date.today().year, 12, 31) - date.today()).days
+
+    # 1. Dispatch Email 1: Lodestar World Positioning
+    try:
+        lw_subj, lw_plain, lw_html = build_lodestar_world_email(
+            today=date.today(),
+            days_left=days_to_rebalance,
+            signal_date=signal_date,
+            holding_name=holding_name,
+            holding_ticker=holding_ticker,
+            holding_month=holding_month,
+            projected_name=ranks[0]["name"],
+            projected_ticker=ranks[0]["ticker"],
+            is_change=is_change,
+            is_cash=is_cash,
+            ranks=daily_payload["ranks"],
+            spx_chg=spx_chg_val,
+            spx_threshold=CASH_THRESHOLD * 100.0,
+            lookback_base=str(base_period),
+            cash_base=str(cash_base_period),
+        )
+        print(f"\nDispatching Email 1: '{lw_subj}'...")
+        email(lw_subj, lw_plain, lw_html, sender_name="Lodestar World")
+    except Exception as e:
+        print(f"Warning: Failed to dispatch Lodestar World email: {e}")
+
+    # 2. Dispatch Email 2: Last Year's Winner Position & Contenders
+    try:
+        lyw_subj, lyw_plain, lyw_html = build_lyw_email(
+            today=date.today(),
+            days_to_year_end=days_to_year_end,
+            live_pos=lp,
+            contenders=r27,
+        )
+        print(f"\nDispatching Email 2: '{lyw_subj}'...")
+        email(lyw_subj, lyw_plain, lyw_html, sender_name="Last Year's Winner")
+    except Exception as e:
+        print(f"Warning: Failed to dispatch LYW email: {e}")
+
+    # 3. Dispatch clean consolidated Telegram daily briefing
+    try:
         top_factors = ranks[:3]
         factors_summary = "\n".join([
             f"  {i}. {r['name']} ({r['ticker']}): <b>{r['mom']:+.1f}%</b>"
@@ -222,17 +272,24 @@ def main():
         contenders_str = ", ".join(top_contenders)
 
         gate_status = "ALL CLEAR (Regime Normal)" if not is_cash else "CASH GATE TRIGGERED"
+        val_gbp = lp.get("valuationGbp", 0.0)
+        net_ret = lp.get("netReturnPct", 0.0)
+        spy_val = lp.get("spyValuationGbp", 0.0)
+        spy_ret = lp.get("spyReturnPct", 0.0)
+        fall_to_stop = lp.get("fallToStopPct", 0.0)
 
         msg = (
             f"<b>Lodestar World &amp; Last Year's Winner · Daily Monitor</b>\n"
-            f"<i>As of {date.today().isoformat()} · {days_left} calendar days to rebalance</i>\n\n"
-            f"<b>🌍 LODESTAR WORLD (50% Sleeve)</b>\n"
-            f"• Projected 1st: <b>{ranks[0]['name']}</b> ({ranks[0]['ticker']}) at <b>{ranks[0]['mom']:+.1f}%</b>\n"
-            f"• 8-Mo Momentum Standings:\n{factors_summary}\n"
+            f"<i>As of {date.today().isoformat()} · {days_to_rebalance}d to rebalance · {days_to_year_end}d to year-end</i>\n\n"
+            f"<b>🌍 LODESTAR WORLD (Factor &amp; Dividend)</b>\n"
+            f"• Current Holding: <b>{holding_name}</b> ({holding_ticker})\n"
+            f"• Rebalance Today: <b>{'NO CHANGE' if not is_change else 'WOULD ROTATE'}</b>\n"
+            f"• 8-Mo Standings:\n{factors_summary}\n"
             f"• S&amp;P 500 Cash Gate: <b>{gate_status}</b> ({spx_chg_val:+.1f}% vs 19m ago, limit {CASH_THRESHOLD*100:.0f}%)\n\n"
-            f"<b>🎯 LAST YEAR'S WINNER (50% Sleeve)</b>\n"
+            f"<b>🎯 LAST YEAR'S WINNER (S&amp;P 500 Momentum)</b>\n"
             f"• Active 2026 Holding: <b>{lp.get('ticker', 'SNDK')}</b> (${lp.get('currentPrice', 0):.2f})\n"
-            f"• 35% Fixed Entry Stop: <b>${lp.get('stopLossPrice', 0):.2f}</b> ({lp.get('statusLabel', 'Untouched')})\n"
+            f"• Valuation: <b>£{val_gbp:,.2f}</b> ({net_ret:+.1f}%) vs SPY £{spy_val:,.2f} ({spy_ret:+.1f}%)\n"
+            f"• 35% Fixed Entry Stop: <b>${lp.get('stopLossPrice', 0):.2f}</b> (Untouched · +{fall_to_stop:.1f}% room)\n"
             f"• 2027 Leader: <b>{leader.get('ticker', 'MRNA')}</b> ({leader.get('ytd', 0):+.1f}% YTD)\n"
             f"• 2027 Contenders: {contenders_str}\n\n"
             f"<b>📊 Live Dashboard &amp; Interactive Charts:</b>\n"
