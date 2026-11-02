@@ -31,52 +31,67 @@ def build_lodestar_world_email(
     cash_base: str,
 ) -> tuple[str, str, str]:
     """Build (subject, plain_text, html) for Lodestar World email."""
+    lead_gap = 0.0
+    if len(ranks) >= 2:
+        lead_gap = round(ranks[0]["momentum"] - ranks[1]["momentum"], 1)
+
     if is_cash:
-        subject = f"Lodestar World: the cash rule would fire, {days_left}d to rebalance"
-        status_label = "CASH RULE WOULD FIRE"
+        subject = f"Lodestar World: CASH RULE FIRES · 100% cash, {days_left}d to rebalance"
+        status_label = "DEFENSIVE CASH FILTER TRIGGERED · 100% CASH"
         badge_bg = "#fef2f2"
         badge_color = "#b91c1c"
         badge_border = "#fecaca"
+        action_title = "Move 100% to Cash at Month-End"
+        action_desc = f"Broad market fell below {spx_threshold:.0f}% threshold. Capital moves 100% to cash to protect capital."
     elif not is_change:
-        subject = f"Lodestar World: no change, {days_left}d to rebalance"
-        status_label = "REBALANCE TODAY: NO CHANGE"
+        subject = f"Lodestar World: {holding_name} ({holding_ticker}) · {days_left}d to rebalance"
+        status_label = f"HOLD {holding_name.upper()} · ZERO TURNOVER"
         badge_bg = "#ecfdf5"
         badge_color = "#047857"
         badge_border = "#a7f3d0"
+        action_title = f"Maintain 100% in {holding_name} ({holding_ticker})"
+        action_desc = f"{holding_name} leads {ranks[1]['name']} by +{lead_gap:.1f} percentage points. Projected allocation remains 100% with zero dealing transactions."
     else:
-        subject = f"Lodestar World: WOULD TRADE {projected_name}, {days_left}d to rebalance"
-        status_label = f"REBALANCE TODAY: WOULD ROTATE TO {projected_name.upper()}"
+        subject = f"Lodestar World: Rotate to {projected_name} ({projected_ticker}) · {days_left}d to rebalance"
+        status_label = f"REBALANCE: WOULD ROTATE TO {projected_name.upper()}"
         badge_bg = "#eff6ff"
         badge_color = "#1d4ed8"
         badge_border = "#bfdbfe"
+        action_title = f"Rotate 100% to {projected_name} ({projected_ticker})"
+        action_desc = f"{projected_name} overtook {holding_name} and leads by +{lead_gap:.1f} percentage points. Rotation pending at month-end close."
 
-    # Lead margin
-    margin_text = ""
-    if len(ranks) >= 2 and not is_cash:
-        lead_gap = round(ranks[0]["momentum"] - ranks[1]["momentum"], 1)
-        margin_text = f"{ranks[0]['name']} holds the slot unless it gives back {lead_gap}% against {ranks[1]['name']} this month."
+    margin_text = f"{ranks[0]['name']} holds the slot unless it gives back {lead_gap}% against {ranks[1]['name']} this month." if (len(ranks) >= 2 and not is_cash) else ""
 
     # Plain text version
     plain_lines = [
-        f"Lodestar World · Daily Monitor",
+        "LODESTAR WORLD · FACTOR & DIVIDEND SLEEVE",
+        f"Positioning & 8-Month Momentum Standings",
+        f"{days_left}d to Rebalance",
+        "",
         f"Status: {status_label}",
         "",
-        f"Holding now: {holding_name} ({holding_ticker}), 100% (signal of {holding_month})",
-        f"If rebalanced today: {projected_name} ({projected_ticker})",
-        f"Next signal at the {today.strftime('%Y-%m')} close, acting {signal_date.strftime('%-d %b %Y')}: {days_left} days out, {today.day} days of month run.",
+        f"CURRENT TARGET ALLOCATION (100%)",
+        f"{holding_name} ({holding_ticker}) · Signal of {holding_month}",
+        f"Projected Action: {action_title}",
+        f"Next signal at {today.strftime('%Y-%m')} close, acting {signal_date.strftime('%-d %b %Y')} ({days_left} days out).",
         "",
-        "8-Month Relative Momentum Standings:",
+        "TRAILING 8-MONTH RELATIVE MOMENTUM:",
     ]
     for r in ranks:
         mark = " ★ (PROJECTED LEADER)" if r.get("is_leader") else ""
-        plain_lines.append(f"  #{r['rank']} {r['name']:<22} ({r['ticker']:<8}) {r['momentum']:>+6.1f}%{mark}")
+        gap = f"-{round(ranks[0]['momentum'] - r['momentum'], 1):.1f}pp" if not r.get("is_leader") else "Leader"
+        plain_lines.append(f"  #{r['rank']} {r['name']:<22} ({r['ticker']:<8}) {r['momentum']:>+6.1f}%  [{gap}]{mark}")
 
     if margin_text:
         plain_lines += ["", margin_text]
 
     plain_lines += [
         "",
-        f"Cash rule: S&P 500 {spx_chg:+.1f}% against its {cash_base} close (fires below {spx_threshold:.0f}%). {'CASH' if is_cash else 'Invested (Regime Normal)'}.",
+        f"DEFENSIVE CASH FILTER (S&P 500):",
+        f"S&P 500 is {spx_chg:+.1f}% vs {cash_base} close (Threshold: {spx_threshold:.0f}%). {'CASH FILTER ACTIVE' if is_cash else 'INVESTED (REGIME NORMAL)'}.",
+        "",
+        "STRATEGY BENCHMARK STATS (2017-2026):",
+        "CAGR: +16.3% vs All-World +11.3% · Max Drawdown: -13.4% vs -15.5% · Sharpe: 1.10 vs 0.80",
         "",
         f"Prices to {today.strftime('%-d %b %Y')}. Provisional. The signal that counts is computed at the month-end close.",
         "https://soylee22.github.io/lodestar-world/",
@@ -88,14 +103,15 @@ def build_lodestar_world_email(
     for r in ranks:
         is_lead = r.get("is_leader")
         row_bg = "#f0fdf4" if is_lead else "#ffffff"
-        font_weight = "700" if is_lead else "500"
         star = '<span style="color:#059669;font-weight:700;margin-left:6px;">★ Leader</span>' if is_lead else ""
+        gap_str = "Leader" if is_lead else f"-{round(ranks[0]['momentum'] - r['momentum'], 1):.1f}%"
         table_rows.append(f"""
           <tr style="background-color:{row_bg};border-bottom:1px solid #e2e8f0;">
             <td style="padding:10px 12px;font-size:13px;font-weight:700;color:#64748b;">#{r['rank']}</td>
-            <td style="padding:10px 12px;font-size:13px;font-weight:{font_weight};color:#0f172a;">{r['name']} {star}</td>
+            <td style="padding:10px 12px;font-size:13px;font-weight:{'700' if is_lead else '600'};color:#0f172a;">{r['name']} {star}</td>
             <td style="padding:10px 12px;font-size:12px;font-family:monospace;color:#475569;">{r['ticker']}</td>
             <td style="padding:10px 12px;font-size:13px;font-weight:700;text-align:right;color:{'#059669' if r['momentum'] >= 0 else '#dc2626'};">{r['momentum']:+.1f}%</td>
+            <td style="padding:10px 12px;font-size:12px;color:#64748b;text-align:right;">{gap_str}</td>
           </tr>
         """)
     table_html = "".join(table_rows)
@@ -119,8 +135,8 @@ def build_lodestar_world_email(
               <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                   <td>
-                    <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#64748b;margin-bottom:4px;">Lodestar World · Global Systematic Rotation</div>
-                    <div style="font-size:24px;font-weight:800;letter-spacing:-0.02em;color:#0f172a;line-height:1.2;">Factor &amp; Dividend Positioning</div>
+                    <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#64748b;margin-bottom:4px;">Lodestar World · Factor &amp; Dividend Sleeve</div>
+                    <div style="font-size:24px;font-weight:800;letter-spacing:-0.02em;color:#0f172a;line-height:1.2;">Positioning &amp; 8-Mo Standings</div>
                   </td>
                   <td align="right" valign="top">
                     <span style="display:inline-block;padding:5px 12px;border-radius:9999px;background-color:#e2e8f0;color:#334155;font-size:12px;font-weight:600;">
@@ -143,25 +159,47 @@ def build_lodestar_world_email(
                 </div>
               </div>
 
-              <!-- Primary Position Card -->
-              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f8fafc;border-radius:12px;border:1px solid #e2e8f0;padding:16px;margin-bottom:22px;">
+              <!-- Active Allocation Card -->
+              <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#475569;margin-bottom:8px;">
+                Active Target Allocation (100%)
+              </div>
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f8fafc;border-radius:12px;border:1px solid #e2e8f0;padding:16px;margin-bottom:20px;">
                 <tr>
-                  <td width="50%" valign="top" style="padding:4px 8px;border-right:1px solid #e2e8f0;">
-                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;margin-bottom:4px;">Current Holding</div>
-                    <div style="font-size:16px;font-weight:800;color:#0f172a;">{holding_name}</div>
-                    <div style="font-size:12px;font-family:monospace;color:#475569;margin-top:2px;">{holding_ticker} · 100% allocation</div>
+                  <td width="60%" valign="top" style="padding:4px 8px;border-right:1px solid #e2e8f0;">
+                    <div style="font-size:18px;font-weight:800;color:#0f172a;">{holding_name} ({holding_ticker})</div>
+                    <div style="font-size:12px;color:#64748b;margin-top:3px;">iShares Edge MSCI World Value Factor UCITS ETF</div>
+                    <div style="font-size:11px;font-family:monospace;color:#64748b;margin-top:2px;">ISIN: IE00BP3QZB59 · London Stock Exchange</div>
                   </td>
-                  <td width="50%" valign="top" style="padding:4px 8px 4px 16px;">
-                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;margin-bottom:4px;">If Rebalanced Today</div>
-                    <div style="font-size:16px;font-weight:800;color:#0f172a;">{projected_name}</div>
-                    <div style="font-size:12px;font-family:monospace;color:#475569;margin-top:2px;">{projected_ticker} · {'Unchanged' if not is_change else 'Trade Required'}</div>
+                  <td width="40%" valign="top" style="padding:4px 8px 4px 16px;">
+                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#64748b;">Target Share</div>
+                    <div style="font-size:22px;font-weight:800;color:#059669;">100%</div>
+                    <div style="font-size:12px;font-weight:600;color:#334155;margin-top:2px;">
+                      Signal: {holding_month}
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Projection & Margin Grid -->
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:20px;">
+                <tr>
+                  <td width="48%" valign="top" style="background-color:#f8fafc;border-radius:10px;border:1px solid #e2e8f0;padding:12px 14px;">
+                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#64748b;margin-bottom:4px;">Next Rebalance</div>
+                    <div style="font-size:14px;font-weight:800;color:#0f172a;">{action_title}</div>
+                    <div style="font-size:12px;color:#64748b;margin-top:4px;">Acts: <b>{signal_date.strftime('%-d %b %Y')}</b> ({days_left}d out)</div>
+                  </td>
+                  <td width="4%"></td>
+                  <td width="48%" valign="top" style="background-color:#f8fafc;border-radius:10px;border:1px solid #e2e8f0;padding:12px 14px;">
+                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#64748b;margin-bottom:4px;">Lead Margin</div>
+                    <div style="font-size:14px;font-weight:800;color:#059669;">+{lead_gap:.1f} percentage points</div>
+                    <div style="font-size:12px;color:#64748b;margin-top:4px;">over #2 {ranks[1]['name']}</div>
                   </td>
                 </tr>
               </table>
 
               <!-- Standings Table -->
               <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#475569;margin-bottom:10px;">
-                Trailing 8-Month Relative Momentum
+                Global Factor &amp; Dividend Leaderboard (8-Mo Momentum)
               </div>
               <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;margin-bottom:16px;">
                 <thead>
@@ -170,6 +208,7 @@ def build_lodestar_world_email(
                     <th align="left" style="padding:10px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;">ETF / Factor</th>
                     <th align="left" style="padding:10px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;">Ticker</th>
                     <th align="right" style="padding:10px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;">8-Mo Return</th>
+                    <th align="right" style="padding:10px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;">Gap</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -197,6 +236,27 @@ def build_lodestar_world_email(
                 </table>
               </div>
 
+              <!-- Track Record Highlights -->
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f8fafc;border-radius:10px;border:1px solid #e2e8f0;padding:12px 14px;margin-bottom:22px;text-align:center;">
+                <tr>
+                  <td width="33%" style="border-right:1px solid #e2e8f0;">
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;">10-Yr CAGR</div>
+                    <div style="font-size:16px;font-weight:800;color:#0f172a;margin-top:2px;">16.3%</div>
+                    <div style="font-size:10px;color:#059669;">+5.0pp vs All-World</div>
+                  </td>
+                  <td width="33%" style="border-right:1px solid #e2e8f0;">
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;">Max Drawdown</div>
+                    <div style="font-size:16px;font-weight:800;color:#0f172a;margin-top:2px;">-13.4%</div>
+                    <div style="font-size:10px;color:#059669;">vs -15.5% Benchmark</div>
+                  </td>
+                  <td width="33%">
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;">Sharpe Ratio</div>
+                    <div style="font-size:16px;font-weight:800;color:#0f172a;margin-top:2px;">1.10</div>
+                    <div style="font-size:10px;color:#059669;">Sortino 1.97</div>
+                  </td>
+                </tr>
+              </table>
+
               <!-- CTA Button -->
               <div style="text-align:center;margin:24px 0 10px 0;">
                 <a href="https://soylee22.github.io/lodestar-world/" style="display:inline-block;padding:12px 28px;background-color:#0f172a;color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;border-radius:10px;letter-spacing:0.02em;">
@@ -210,7 +270,7 @@ def build_lodestar_world_email(
           <!-- Footer -->
           <tr>
             <td style="padding:18px 8px;text-align:center;font-size:11px;color:#94a3b8;line-height:1.5;">
-              Provisional intraday reading as of {today.strftime('%d %b %Y')}. Official signal computes at month-end close.<br>
+              Provisional reading as of {today.strftime('%d %b %Y')}. Official signal computes at month-end close.<br>
               Lodestar World · <a href="https://soylee22.github.io/lodestar-world/" style="color:#64748b;text-decoration:underline;">soylee22.github.io/lodestar-world</a>
             </td>
           </tr>
@@ -222,6 +282,7 @@ def build_lodestar_world_email(
 </body>
 </html>
 """
+    return subject, plain, html
     return subject, plain, html
 
 

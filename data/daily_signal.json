@@ -4,7 +4,7 @@
   "days_left": 28,
   "cash_gate": {
     "active": false,
-    "spx_change": 36.37,
+    "spx_change": 36.21,
     "threshold": -25.0
   },
   "ranks": [
@@ -13,7 +13,7 @@
       "slot": "WLD_VAL",
       "name": "World Value",
       "ticker": "IWVL.L",
-      "momentum": 25.89,
+      "momentum": 25.81,
       "is_leader": true
     },
     {
@@ -21,7 +21,7 @@
       "slot": "WLD_MOM",
       "name": "World Momentum",
       "ticker": "IWMO.L",
-      "momentum": 15.67,
+      "momentum": 15.6,
       "is_leader": false
     },
     {
@@ -29,7 +29,7 @@
       "slot": "WLD_QUAL",
       "name": "World Quality",
       "ticker": "IWQU.L",
-      "momentum": 15.07,
+      "momentum": 15.0,
       "is_leader": false
     },
     {
@@ -37,7 +37,7 @@
       "slot": "WLD_SMALL",
       "name": "World Small Cap",
       "ticker": "WSML.L",
-      "momentum": 11.64,
+      "momentum": 11.57,
       "is_leader": false
     },
     {
@@ -52,5 +52,5 @@
   "projected_pick": "WLD_VAL",
   "projected_ticker": "IWVL.L",
   "projected_name": "World Value",
-  "built_at": "2026-11-02T19:00:01.816131"
+  "built_at": "2026-11-02T19:16:17.542963"
 }
