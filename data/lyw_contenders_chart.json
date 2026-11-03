@@ -220,7 +220,7 @@
       "rank": 1,
       "color": "#2563eb",
       "logo": "assets/company-logos/MRNA.png",
-      "currentYtd": 625.2,
+      "currentYtd": 615.6,
       "peakYtd": 696.5,
       "peakDate": "2026-10-21",
       "isHolding": false,
@@ -435,7 +435,7 @@
         594.0,
         621.8,
         618.5,
-        625.2
+        615.6
       ]
     },
     {
@@ -444,7 +444,7 @@
       "rank": 2,
       "color": "#d97706",
       "logo": "assets/company-logos/SNDK.png",
-      "currentYtd": 297.2,
+      "currentYtd": 290.6,
       "peakYtd": 748.4,
       "peakDate": "2026-06-25",
       "isHolding": true,
@@ -659,7 +659,7 @@
         410.4,
         383.2,
         318.1,
-        297.2
+        290.6
       ]
     },
     {
@@ -668,7 +668,7 @@
       "rank": 3,
       "color": "#0d9488",
       "logo": "assets/company-logos/DELL.png",
-      "currentYtd": 218.3,
+      "currentYtd": 210.6,
       "peakYtd": 364.6,
       "peakDate": "2026-09-17",
       "isHolding": false,
@@ -883,7 +883,7 @@
         290.5,
         276.0,
         235.5,
-        218.3
+        210.6
       ]
     },
     {
@@ -892,7 +892,7 @@
       "rank": 4,
       "color": "#e11d48",
       "logo": "assets/company-logos/MU.png",
-      "currentYtd": 167.4,
+      "currentYtd": 164.5,
       "peakYtd": 284.9,
       "peakDate": "2026-06-25",
       "isHolding": false,
@@ -1107,7 +1107,7 @@
         211.9,
         196.4,
         180.7,
-        167.4
+        164.5
       ]
     },
     {
@@ -1116,7 +1116,7 @@
       "rank": 5,
       "color": "#7c3aed",
       "logo": "assets/company-logos/MPC.png",
-      "currentYtd": 166.3,
+      "currentYtd": 163.6,
       "peakYtd": 197.1,
       "peakDate": "2026-10-14",
       "isHolding": false,
@@ -1331,7 +1331,7 @@
         170.0,
         164.9,
         172.4,
-        166.3
+        163.6
       ]
     },
     {
@@ -1340,7 +1340,7 @@
       "rank": null,
       "color": "#64748b",
       "logo": null,
-      "currentYtd": 11.6,
+      "currentYtd": 10.9,
       "peakYtd": 14.9,
       "peakDate": "2026-10-06",
       "isHolding": false,
@@ -1555,7 +1555,7 @@
         13.9,
         13.5,
         11.5,
-        11.6
+        10.9
       ]
     }
   ]
