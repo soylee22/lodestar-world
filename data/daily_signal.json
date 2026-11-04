@@ -1,10 +1,10 @@
 {
-  "asof": "2026-11-03",
+  "asof": "2026-11-04",
   "lookback_base": "2026-03",
-  "days_left": 27,
+  "days_left": 26,
   "cash_gate": {
     "active": false,
-    "spx_change": 35.42,
+    "spx_change": 35.91,
     "threshold": -25.0
   },
   "ranks": [
@@ -13,7 +13,7 @@
       "slot": "WLD_VAL",
       "name": "World Value",
       "ticker": "IWVL.L",
-      "momentum": 25.97,
+      "momentum": 24.28,
       "is_leader": true
     },
     {
@@ -21,7 +21,7 @@
       "slot": "WLD_MOM",
       "name": "World Momentum",
       "ticker": "IWMO.L",
-      "momentum": 15.74,
+      "momentum": 14.03,
       "is_leader": false
     },
     {
@@ -29,7 +29,7 @@
       "slot": "WLD_QUAL",
       "name": "World Quality",
       "ticker": "IWQU.L",
-      "momentum": 15.14,
+      "momentum": 13.93,
       "is_leader": false
     },
     {
@@ -37,7 +37,7 @@
       "slot": "WLD_SMALL",
       "name": "World Small Cap",
       "ticker": "WSML.L",
-      "momentum": 11.71,
+      "momentum": 10.74,
       "is_leader": false
     },
     {
@@ -45,12 +45,12 @@
       "slot": "WLD_DIV",
       "name": "Dividend Leaders",
       "ticker": "TDGB.L",
-      "momentum": 4.73,
+      "momentum": 4.07,
       "is_leader": false
     }
   ],
   "projected_pick": "WLD_VAL",
   "projected_ticker": "IWVL.L",
   "projected_name": "World Value",
-  "built_at": "2026-11-03T03:19:35.242691"
+  "built_at": "2026-11-04T01:55:05.901174"
 }
