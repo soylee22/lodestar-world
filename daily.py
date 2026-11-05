@@ -223,6 +223,14 @@ def main():
     days_to_rebalance = (signal_date - date.today()).days
     days_to_year_end = (date(date.today().year, 12, 31) - date.today()).days
 
+    # Load Lodestar live forward test data
+    try:
+        from lodestar_forward_test import build_lodestar_forward_test
+        lw_forward_test = build_lodestar_forward_test()
+    except Exception as e:
+        print(f"Warning: Failed to load Lodestar forward test data: {e}")
+        lw_forward_test = None
+
     # 1. Dispatch Email 1: Lodestar World Positioning
     try:
         lw_subj, lw_plain, lw_html = build_lodestar_world_email(
@@ -241,6 +249,7 @@ def main():
             spx_threshold=CASH_THRESHOLD * 100.0,
             lookback_base=str(base_period),
             cash_base=str(cash_base_period),
+            forward_test=lw_forward_test,
         )
         print(f"\nDispatching Email 1: '{lw_subj}'...")
         email(lw_subj, lw_plain, lw_html, sender_name="Lodestar World")
@@ -278,6 +287,20 @@ def main():
         spy_ret = lp.get("spyReturnPct", 0.0)
         fall_to_stop = lp.get("fallToStopPct", 0.0)
 
+        lw_fwd_lines = ""
+        if lw_forward_test and "meta" in lw_forward_test:
+            lfm = lw_forward_test["meta"]
+            bm_map = {b["ticker"]: b for b in lw_forward_test.get("benchmarks", [])}
+            vuag_ret = bm_map.get("VUAG", {}).get("realReturn", 0.0)
+            vukg_ret = bm_map.get("VUKG", {}).get("realReturn", 0.0)
+            vall_ret = bm_map.get("VALL", {}).get("realReturn", 0.0)
+            spy_bm_ret = bm_map.get("SPY", {}).get("realReturn", 0.0)
+            lw_fwd_lines = (
+                f"• Live T212 Account: <b>£{lfm.get('currentValuationGbp', 0):,.2f}</b> "
+                f"({lfm.get('unrealisedPnlPct', 0):+.2f}% on £{lfm.get('totalCapitalGbp', 0):,.2f} capital, {lfm.get('totalShares', 0):.4f} shs {lfm.get('holdingTicker', 'IWFV.L')})\n"
+                f"• Benchmarks vs Real £3.80k: <b>VUAG</b> {vuag_ret:+.1f}% · <b>VUKG</b> {vukg_ret:+.1f}% · <b>VALL</b> {vall_ret:+.1f}% · <b>SPY</b> {spy_bm_ret:+.1f}%\n"
+            )
+
         if lp.get("isStopped"):
             lyw_block = (
                 f"<b>🎯 LAST YEAR'S WINNER (S&amp;P 500 Momentum)</b>\n"
@@ -306,7 +329,8 @@ def main():
             f"• Current Holding: <b>{holding_name}</b> ({holding_ticker})\n"
             f"• Rebalance Today: <b>{'NO CHANGE' if not is_change else 'WOULD ROTATE'}</b>\n"
             f"• 8-Mo Standings:\n{factors_summary}\n"
-            f"• S&amp;P 500 Cash Gate: <b>{gate_status}</b> ({spx_chg_val:+.1f}% vs 19m ago, limit {CASH_THRESHOLD*100:.0f}%)\n\n"
+            f"• S&amp;P 500 Cash Gate: <b>{gate_status}</b> ({spx_chg_val:+.1f}% vs 19m ago, limit {CASH_THRESHOLD*100:.0f}%)\n"
+            f"{lw_fwd_lines}\n"
             f"{lyw_block}"
             f"<b>📊 Live Dashboard &amp; Interactive Charts:</b>\n"
             f"https://soylee22.github.io/lodestar-world/"

@@ -28,6 +28,7 @@ sys.path.insert(0, str(HERE))
 from universe import FACTOR_NAMES, TRADABLE, STYLES  # noqa: E402
 from lyw_engine import build_lyw_data  # noqa: E402
 from dotcom_engine import build_dotcom_data  # noqa: E402
+from lodestar_forward_test import build_lodestar_forward_test  # noqa: E402
 from pipeline.lookthrough import consolidate, company_domain  # noqa: E402
 from pipeline.logos import company_key, load_registry  # noqa: E402
 
@@ -642,6 +643,7 @@ def main():
 
     payload["lyw"] = lyw_data
     payload["dotcom"] = dotcom_data
+    payload["lodestarForwardTest"] = build_lodestar_forward_test()
     payload["combined"] = {
         "allocation": "50% Lodestar World / 50% Last Year's Winner",
         "yearsCovered": len(combined_years),

@@ -29,6 +29,7 @@ def build_lodestar_world_email(
     spx_threshold: float,
     lookback_base: str,
     cash_base: str,
+    forward_test: Dict[str, Any] | None = None,
 ) -> tuple[str, str, str]:
     """Build (subject, plain_text, html) for Lodestar World email."""
     lead_gap = 0.0
@@ -85,6 +86,30 @@ def build_lodestar_world_email(
     if margin_text:
         plain_lines += ["", margin_text]
 
+    if forward_test and "realAccount" in forward_test:
+        ra = forward_test["realAccount"]
+        plain_lines += [
+            "",
+            "LIVE FORWARD TESTING · TRADING 212 ACCOUNT:",
+            f"Portfolio: {ra.get('pieName', 'Lodestar World')} (Pie ID {ra.get('pieId', '10205730')})",
+            f"Holding: {ra.get('totalShares', 64.8911):.4f} shs of {ra.get('ticker', 'IWFV.L')} @ {ra.get('blendedEntryPence', 5862.95):,.2f}p",
+            f"Invested Capital: £{ra.get('totalCapitalGbp', 3804.53):,.2f} across 4 AutoInvest orders on 2 Nov 2026",
+            f"Current Valuation: £{ra.get('currentValueGbp', 3676.08):,.2f} ({ra.get('netPnlGbp', -128.45):+,.2f} / {ra.get('netReturnPct', -3.38):+.2f}%)",
+            "",
+            "PASSIVE TRACKER BENCHMARKS (From 2 Nov 2026 Entry):",
+        ]
+        for b in forward_test.get("benchmarks", []):
+            is_strat = b.get("isStrategy") or b.get("ticker") == "LODESTAR"
+            diff_str = (
+                f" · vs Strategy: £{b.get('diffReal', 0):+,.2f} ({b.get('diffPct', 0):+.2f}pp)"
+                if not is_strat
+                else ""
+            )
+            ret_val = b.get("realReturn", 0.0)
+            plain_lines.append(
+                f"• {b['name']}: £{b['realValue']:,.2f} ({ret_val:+.2f}%){diff_str}"
+            )
+
     plain_lines += [
         "",
         f"DEFENSIVE CASH FILTER (S&P 500):",
@@ -115,6 +140,77 @@ def build_lodestar_world_email(
           </tr>
         """)
     table_html = "".join(table_rows)
+
+    forward_test_html = ""
+    if forward_test and "realAccount" in forward_test:
+        ra = forward_test["realAccount"]
+        pnl_val = ra.get("netPnlGbp", 0.0)
+        ret_val = ra.get("netReturnPct", 0.0)
+        bench_rows = []
+        for b in forward_test.get("benchmarks", []):
+            is_strat = b.get("isStrategy") or b.get("ticker") == "LODESTAR"
+            row_bg = "#f0fdf4" if is_strat else "#ffffff"
+            diff_real = b.get("diffReal", 0.0)
+            diff_pct = b.get("diffPct", 0.0)
+            diff_color = "#059669" if diff_real >= 0 else "#dc2626"
+            diff_label = (
+                f"<span style=\"color:{diff_color};font-weight:700;\">{diff_real:+,.2f} ({diff_pct:+.2f}pp)</span>"
+                if not is_strat
+                else "<span style=\"color:#64748b;font-weight:600;\">Baseline</span>"
+            )
+            b_ret = b.get("realReturn", 0.0)
+            b_color = "#059669" if b_ret >= 0 else "#dc2626"
+            bench_rows.append(f"""
+                <tr style=\"background-color:{row_bg};border-bottom:1px solid #e2e8f0;\">
+                  <td style=\"padding:8px 12px;font-weight:{'700' if is_strat else '600'};color:#0f172a;\">{b['name']}</td>
+                  <td style=\"padding:8px 12px;text-align:right;font-weight:700;color:#0f172a;\">£{b['realValue']:,.2f}</td>
+                  <td style=\"padding:8px 12px;text-align:right;color:{b_color};font-weight:700;\">{b_ret:+.2f}%</td>
+                  <td style=\"padding:8px 12px;text-align:right;\">{diff_label}</td>
+                </tr>
+            """)
+        bench_rows_html = "".join(bench_rows)
+
+        forward_test_html = f"""
+              <!-- Live Forward Testing Card -->
+              <div style=\"font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#475569;margin-bottom:8px;\">
+                Live Forward Testing (Trading 212 Account)
+              </div>
+              <table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"background-color:#f8fafc;border-radius:12px;border:1px solid #e2e8f0;padding:14px 16px;margin-bottom:14px;\">
+                <tr>
+                  <td width=\"55%\" valign=\"top\" style=\"border-right:1px solid #e2e8f0;padding-right:12px;\">
+                    <div style=\"font-size:11px;font-weight:700;text-transform:uppercase;color:#64748b;\">Live Holding</div>
+                    <div style=\"font-size:15px;font-weight:800;color:#0f172a;margin-top:2px;\">{ra.get('totalShares', 64.8911):.4f} shs of {ra.get('ticker', 'IWFV.L')}</div>
+                    <div style=\"font-size:12px;color:#64748b;margin-top:3px;\">Cost basis: {ra.get('blendedEntryPence', 5862.95):,.2f}p (£{ra.get('totalCapitalGbp', 3804.53):,.2f} invested)</div>
+                    <div style=\"font-size:11px;font-family:monospace;color:#64748b;margin-top:2px;\">4 AutoInvest buys on 2 Nov 2026 (Pie {ra.get('pieId', '10205730')})</div>
+                  </td>
+                  <td width=\"45%\" valign=\"top\" style=\"padding-left:14px;\">
+                    <div style=\"font-size:11px;font-weight:700;text-transform:uppercase;color:#64748b;\">Current Valuation</div>
+                    <div style=\"font-size:18px;font-weight:800;color:#0f172a;margin-top:2px;\">£{ra.get('currentValueGbp', 3676.08):,.2f}</div>
+                    <div style=\"font-size:12px;font-weight:700;color:{'#059669' if pnl_val >= 0 else '#dc2626'};margin-top:3px;\">
+                      {pnl_val:+,.2f} ({ret_val:+.2f}%)
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Passive Tracker Benchmarks Table -->
+              <div style=\"font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#475569;margin-bottom:8px;\">
+                Benchmark Performance vs Passive Trackers (From 2 Nov 2026 Entry)
+              </div>
+              <table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;margin-bottom:20px;font-size:12.5px;\">
+                <thead>
+                  <tr style=\"background-color:#f8fafc;border-bottom:1px solid #e2e8f0;\">
+                    <th align=\"left\" style=\"padding:8px 12px;font-size:11px;color:#64748b;text-transform:uppercase;\">Strategy / Tracker</th>
+                    <th align=\"right\" style=\"padding:8px 12px;font-size:11px;color:#64748b;text-transform:uppercase;\">Real Value</th>
+                    <th align=\"right\" style=\"padding:8px 12px;font-size:11px;color:#64748b;text-transform:uppercase;\">Return</th>
+                    <th align=\"right\" style=\"padding:8px 12px;font-size:11px;color:#64748b;text-transform:uppercase;\">vs Lodestar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {bench_rows_html}
+                </tbody>
+              </table>
+        """
 
     html = f"""<!DOCTYPE html>
 <html>
@@ -235,6 +331,8 @@ def build_lodestar_world_email(
                   </tr>
                 </table>
               </div>
+
+              {forward_test_html}
 
               <!-- Track Record Highlights -->
               <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f8fafc;border-radius:10px;border:1px solid #e2e8f0;padding:12px 14px;margin-bottom:22px;text-align:center;">
