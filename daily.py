@@ -278,6 +278,26 @@ def main():
         spy_ret = lp.get("spyReturnPct", 0.0)
         fall_to_stop = lp.get("fallToStopPct", 0.0)
 
+        if lp.get("isStopped"):
+            lyw_block = (
+                f"<b>🎯 LAST YEAR'S WINNER (S&amp;P 500 Momentum)</b>\n"
+                f"• Active Status: <b>STOPPED OUT · 100% CASH</b>\n"
+                f"• Liquidated: <b>SNDK sold at ${lp.get('exitPrice', 998.05):.2f} OTC</b> (breached ${lp.get('stopLossPrice', 1012.51):.2f} stop)\n"
+                f"• Realised Cash: <b>£1,323.36</b> in Trading 212 pie cash until Jan 2027\n"
+                f"• Benchmarks vs £1k: <b>VUAG</b> £965.20 (-3.5%) · <b>VUKG</b> £1,026.31 (+2.6%) · <b>VALL</b> £968.60 (-3.1%)\n"
+                f"• 2027 Leader: <b>{leader.get('ticker', 'MRNA')}</b> ({leader.get('ytd', 0):+.1f}% YTD)\n"
+                f"• 2027 Contenders: {contenders_str}\n\n"
+            )
+        else:
+            lyw_block = (
+                f"<b>🎯 LAST YEAR'S WINNER (S&amp;P 500 Momentum)</b>\n"
+                f"• Active 2026 Holding: <b>{lp.get('ticker', 'SNDK')}</b> (${lp.get('currentPrice', 0):.2f})\n"
+                f"• Valuation: <b>£{val_gbp:,.2f}</b> ({net_ret:+.1f}%) vs SPY £{spy_val:,.2f} ({spy_ret:+.1f}%)\n"
+                f"• 35% Fixed Entry Stop: <b>${lp.get('stopLossPrice', 0):.2f}</b> (Untouched · +{fall_to_stop:.1f}% room)\n"
+                f"• 2027 Leader: <b>{leader.get('ticker', 'MRNA')}</b> ({leader.get('ytd', 0):+.1f}% YTD)\n"
+                f"• 2027 Contenders: {contenders_str}\n\n"
+            )
+
         msg = (
             f"<b>Lodestar World &amp; Last Year's Winner · Daily Monitor</b>\n"
             f"<i>As of {date.today().isoformat()} · {days_to_rebalance}d to rebalance · {days_to_year_end}d to year-end</i>\n\n"
@@ -286,12 +306,7 @@ def main():
             f"• Rebalance Today: <b>{'NO CHANGE' if not is_change else 'WOULD ROTATE'}</b>\n"
             f"• 8-Mo Standings:\n{factors_summary}\n"
             f"• S&amp;P 500 Cash Gate: <b>{gate_status}</b> ({spx_chg_val:+.1f}% vs 19m ago, limit {CASH_THRESHOLD*100:.0f}%)\n\n"
-            f"<b>🎯 LAST YEAR'S WINNER (S&amp;P 500 Momentum)</b>\n"
-            f"• Active 2026 Holding: <b>{lp.get('ticker', 'SNDK')}</b> (${lp.get('currentPrice', 0):.2f})\n"
-            f"• Valuation: <b>£{val_gbp:,.2f}</b> ({net_ret:+.1f}%) vs SPY £{spy_val:,.2f} ({spy_ret:+.1f}%)\n"
-            f"• 35% Fixed Entry Stop: <b>${lp.get('stopLossPrice', 0):.2f}</b> (Untouched · +{fall_to_stop:.1f}% room)\n"
-            f"• 2027 Leader: <b>{leader.get('ticker', 'MRNA')}</b> ({leader.get('ytd', 0):+.1f}% YTD)\n"
-            f"• 2027 Contenders: {contenders_str}\n\n"
+            f"{lyw_block}"
             f"<b>📊 Live Dashboard &amp; Interactive Charts:</b>\n"
             f"https://soylee22.github.io/lodestar-world/"
         )

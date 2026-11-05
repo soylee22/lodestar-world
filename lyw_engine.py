@@ -12,7 +12,10 @@ from datetime import date, datetime
 from pathlib import Path
 
 import pandas as pd
-import yfinance as yf
+try:
+    import yfinance as yf
+except ImportError:
+    yf = None
 
 HERE = Path(__file__).resolve().parent
 DATA_DIR = HERE / "data"
@@ -101,63 +104,148 @@ def build_lyw_data() -> dict:
             "benchmarkWealth": round(spy_wealth),
         })
 
-    # Live 2026 holding: SNDK
-    # Fixed execution parameters from trading record
+    # Live 2026 holding: SNDK - STOPPED OUT on 5 Nov 2026 at $998.05
     entry_price_2026 = 1557.71
+    exit_price_2026 = 998.05
     peak_price_2026 = 1557.71
-    cur_price_2026 = 1150.89
-    # Try fetching live quote if available
-    try:
-        t_sndk = yf.Ticker("SNDK")
-        p = t_sndk.fast_info.last_price
-        if p and p > 0:
-            cur_price_2026 = round(float(p), 2)
-            if cur_price_2026 > peak_price_2026:
-                peak_price_2026 = cur_price_2026
-    except Exception:
-        pass
+    cur_price_2026 = exit_price_2026
 
     stop_price_2026 = round(entry_price_2026 * (1.0 - 0.35), 2)
     buffer_dollars = round(cur_price_2026 - stop_price_2026, 2)
     buffer_pct = round((buffer_dollars / stop_price_2026) * 100.0, 1)
-    fall_to_stop_pct = round((1.0 - stop_price_2026 / cur_price_2026) * 100.0, 1) if cur_price_2026 > 0 else 0.0
-    is_stopped_2026 = cur_price_2026 <= stop_price_2026
+    fall_to_stop_pct = 0.0
+    is_stopped_2026 = True
 
-    # Valuation vs SPY benchmark
-    fx_rate = 1.33
-    spy_price = 770.0
-    try:
-        fx_t = yf.Ticker("GBPUSD=X").fast_info.last_price
-        if fx_t and fx_t > 0:
-            fx_rate = float(fx_t)
-        spy_t = yf.Ticker("SPY").fast_info.last_price
-        if spy_t and spy_t > 0:
-            spy_price = float(spy_t)
-    except Exception:
-        pass
+    # Realised leg performance:
+    val_gbp = 626.97
+    net_pnl_gbp = -373.03
+    net_return_pct = -37.30
 
-    sndk_shares = 0.8481779
+    # Live Vanguard & Index Benchmark Comparisons (Since 12 Oct 2026 entry with £1,000 capital)
+    # Entry prices on 12 Oct 2026 close:
+    # VUAG.L: £114.36
+    # VUKG.L: £57.39
+    # VALL.L: £3.774
+    # SPY: $778.10
+    vuag_price = 110.38
+    vukg_price = 58.90
+    vall_price = 3.655
+    spy_price = 766.81
+    fx_rate = 1.3482
+
+    import urllib.request
+    def _fetch_px(ticker: str, fallback: float) -> float:
+        try:
+            url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?interval=1d&range=5d"
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=3) as r:
+                d = json.load(r)
+                p = d["chart"]["result"][0]["meta"].get("regularMarketPrice")
+                if p and float(p) > 0:
+                    return round(float(p), 4)
+        except Exception:
+            pass
+        return fallback
+
+    vuag_price = _fetch_px("VUAG.L", 110.38)
+    vukg_price = _fetch_px("VUKG.L", 58.90)
+    vall_price = _fetch_px("VALL.L", 3.655)
+    spy_price = _fetch_px("SPY", 766.81)
+    fx_rate = _fetch_px("GBPUSD=X", 1.3482)
+
+    vuag_shares = round(1000.0 / 114.36, 6)
+    vukg_shares = round(1000.0 / 57.39, 6)
+    vall_shares = round(1000.0 / 3.774, 6)
     spy_shares = 1.6983917
-    val_gbp = round(sndk_shares * cur_price_2026 / fx_rate, 2)
-    net_pnl_gbp = round(val_gbp - 1000.0, 2)
-    net_return_pct = round((val_gbp / 1000.0 - 1.0) * 100.0, 2)
+
+    vuag_val = round(vuag_shares * vuag_price, 2)
+    vuag_ret = round((vuag_price / 114.36 - 1.0) * 100.0, 2)
+    vukg_val = round(vukg_shares * vukg_price, 2)
+    vukg_ret = round((vukg_price / 57.39 - 1.0) * 100.0, 2)
+    vall_val = round(vall_shares * vall_price, 2)
+    vall_ret = round((vall_price / 3.774 - 1.0) * 100.0, 2)
     spy_val_gbp = round(spy_shares * spy_price / fx_rate, 2)
     spy_return_pct = round((spy_val_gbp / 1000.0 - 1.0) * 100.0, 2)
-    diff_vs_spy_gbp = round(val_gbp - spy_val_gbp, 2)
-    drawdown_from_entry = round((cur_price_2026 / entry_price_2026 - 1.0) * 100.0, 2)
-    drawdown_from_peak = round((cur_price_2026 / peak_price_2026 - 1.0) * 100.0, 2)
+
+    benchmarks = [
+        {
+            "id": "VUAG",
+            "ticker": "VUAG.L",
+            "name": "Vanguard S&P 500 (Acc)",
+            "assetClass": "US Large-Cap Equity",
+            "currency": "GBP",
+            "entryDate": "12 Oct 2026",
+            "entryPrice": 114.36,
+            "currentPrice": vuag_price,
+            "shares": vuag_shares,
+            "capitalGbp": 1000.0,
+            "valuationGbp": vuag_val,
+            "netReturnPct": vuag_ret,
+            "diffVsStrategyGbp": round(val_gbp - vuag_val, 2),
+        },
+        {
+            "id": "VUKG",
+            "ticker": "VUKG.L",
+            "name": "Vanguard FTSE 100 (Acc)",
+            "assetClass": "UK Large-Cap Equity",
+            "currency": "GBP",
+            "entryDate": "12 Oct 2026",
+            "entryPrice": 57.39,
+            "currentPrice": vukg_price,
+            "shares": vukg_shares,
+            "capitalGbp": 1000.0,
+            "valuationGbp": vukg_val,
+            "netReturnPct": vukg_ret,
+            "diffVsStrategyGbp": round(val_gbp - vukg_val, 2),
+        },
+        {
+            "id": "VALL",
+            "ticker": "VALL.L",
+            "name": "Vanguard FTSE Global All-Cap (Acc)",
+            "assetClass": "Global All-Cap Equity",
+            "currency": "GBP",
+            "entryDate": "12 Oct 2026",
+            "entryPrice": 3.774,
+            "currentPrice": vall_price,
+            "shares": vall_shares,
+            "capitalGbp": 1000.0,
+            "valuationGbp": vall_val,
+            "netReturnPct": vall_ret,
+            "diffVsStrategyGbp": round(val_gbp - vall_val, 2),
+        },
+        {
+            "id": "SPY",
+            "ticker": "SPY",
+            "name": "SPDR S&P 500 ETF (USD)",
+            "assetClass": "US S&P 500 (USD Model)",
+            "currency": "USD",
+            "entryDate": "12 Oct 2026",
+            "entryPrice": 778.10,
+            "currentPrice": spy_price,
+            "shares": spy_shares,
+            "capitalGbp": 1000.0,
+            "valuationGbp": spy_val_gbp,
+            "netReturnPct": spy_return_pct,
+            "diffVsStrategyGbp": round(val_gbp - spy_val_gbp, 2),
+        },
+    ]
+
+    drawdown_from_entry = round((exit_price_2026 / entry_price_2026 - 1.0) * 100.0, 2)
+    drawdown_from_peak = round((exit_price_2026 / peak_price_2026 - 1.0) * 100.0, 2)
 
     live_position = {
         "holdingYear": 2026,
-        "ticker": "SNDK",
-        "name": "SanDisk Corp.",
+        "ticker": "CASH",
+        "name": "100% Cash (SNDK Stopped Out)",
         "broker": "Trading 212",
         "investedGbp": 998.50,
         "investedUsd": 1557.71,
-        "shares": sndk_shares,
+        "shares": 0.0,
         "entryDate": "12 Oct 2026, 11:47 BST",
+        "exitDate": "5 Nov 2026, 09:03 UTC",
         "entryPrice": entry_price_2026,
-        "currentPrice": cur_price_2026,
+        "exitPrice": exit_price_2026,
+        "currentPrice": exit_price_2026,
         "peakPrice": peak_price_2026,
         "stopLossPercent": 35.0,
         "stopLossPrice": stop_price_2026,
@@ -170,14 +258,16 @@ def build_lyw_data() -> dict:
         "valuationGbp": val_gbp,
         "netPnlGbp": net_pnl_gbp,
         "netReturnPct": net_return_pct,
+        "totalPieCashRealisedGbp": 1323.36,
         "spyPrice": round(spy_price, 2),
         "spyValuationGbp": spy_val_gbp,
         "spyReturnPct": spy_return_pct,
-        "diffVsSpyGbp": diff_vs_spy_gbp,
+        "diffVsSpyGbp": round(val_gbp - spy_val_gbp, 2),
         "isStopped": is_stopped_2026,
-        "statusLabel": "STOPPED OUT · IN CASH" if is_stopped_2026 else f"STOP UNTOUCHED (+{buffer_pct}% BUFFER)",
-        "statusClass": "red" if is_stopped_2026 else "green",
+        "statusLabel": "STOPPED OUT · 100% CASH",
+        "statusClass": "red",
         "reselectionDate": "31 Dec 2026 close",
+        "benchmarks": benchmarks,
     }
 
     # Load 2027 contenders chart data if present
@@ -220,8 +310,8 @@ def build_lyw_data() -> dict:
                 status = "Rank 1 · 2027 Target"
                 action = "Buy at Jan 2027 Open"
             elif is_hold:
-                status = f"Rank {idx} · Active Holding"
-                action = "Active Hold (35% Stop)"
+                status = f"Rank {idx} · Liquidated (35% Stop)"
+                action = "Stopped Out ($998.05)"
             else:
                 status = f"Rank {idx} · Contender"
                 action = f"{gap}% Gap"
@@ -341,6 +431,7 @@ def build_lyw_data() -> dict:
             "asof": date.today().isoformat(),
         },
         "livePosition": live_position,
+        "benchmarks": benchmarks,
         "race2027": contenders,
         "contendersChart": chart_data,
         "stats": stats,
