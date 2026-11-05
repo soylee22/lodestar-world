@@ -389,8 +389,7 @@ def build_lyw_email(
             "The December signal selects the stock for the first trading session of January.",
             "",
         ]
-        "Next-year candidates · YTD total return through today:",
-    ]
+    plain_lines.append("Next-year candidates · YTD total return through today:")
     for i, c in enumerate(contenders[:5], 1):
         plain_lines.append(f"  {i}. {c['name']} ({c['ticker']}) · {c['ytd']:+.2f}%")
 
