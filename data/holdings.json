@@ -1,6 +1,6 @@
 {
   "as_at": "2026-10",
-  "fetched_at": "2026-11-04T13:43:40.646516+00:00",
+  "fetched_at": "2026-11-05T13:56:40.454063+00:00",
   "snapshot_date": "2026-10",
   "source": "Yahoo Finance fund holdings disclosure",
   "legs": {
@@ -16,13 +16,13 @@
           "sector": "Technology",
           "website": "https://www.micron.com",
           "industry": "Semiconductors",
-          "market_cap": 967479984128.0,
-          "pe": 11.504103,
-          "forward_pe": 4.115797,
+          "market_cap": 899741646848.0,
+          "pe": 10.698641,
+          "forward_pe": 3.8276286,
           "revenue_growth": 3.793,
           "earnings_growth": 10.595,
           "profit_margin": 0.63796,
-          "dividend_yield": 0.07016723190270142
+          "dividend_yield": 0.0754498698489745
         },
         {
           "symbol": "CSCO",
@@ -32,13 +32,13 @@
           "sector": "Technology",
           "website": "https://www.cisco.com",
           "industry": "Communication Equipment",
-          "market_cap": 405968191488.0,
-          "pe": 30.921923,
-          "forward_pe": 18.315449,
+          "market_cap": 408491425792.0,
+          "pe": 31.114115,
+          "forward_pe": 18.429287,
           "revenue_growth": 0.176,
           "earnings_growth": 0.521,
           "profit_margin": 0.20951,
-          "dividend_yield": 1.6315431679129844
+          "dividend_yield": 1.6214651095454107
         },
         {
           "symbol": "VZ",
@@ -48,13 +48,13 @@
           "sector": "Communication Services",
           "website": "https://www.verizon.com",
           "industry": "Telecom Services",
-          "market_cap": 187501625344.0,
-          "pe": 11.540816,
-          "forward_pe": 8.525924,
+          "market_cap": 191356092416.0,
+          "pe": 11.778061,
+          "forward_pe": 8.701191,
           "revenue_growth": 0.015,
           "earnings_growth": 0.068,
           "profit_margin": 0.1178,
-          "dividend_yield": 6.255526083112289
+          "dividend_yield": 6.129521334199697
         },
         {
           "symbol": "7203.T",
@@ -64,13 +64,13 @@
           "sector": "Consumer Cyclical",
           "website": "https://global.toyota",
           "industry": "Auto Manufacturers",
-          "market_cap": 35663982362624.0,
-          "pe": 8.617451,
-          "forward_pe": 9.339337,
+          "market_cap": 41611903893504.0,
+          "pe": 10.054642,
+          "forward_pe": 10.896922,
           "revenue_growth": 0.104,
           "earnings_growth": 0.869,
           "profit_margin": 0.0863,
-          "dividend_yield": 3.302509907529723
+          "dividend_yield": 2.830455703368242
         },
         {
           "symbol": "T",
@@ -80,13 +80,13 @@
           "sector": "Communication Services",
           "website": "https://www.att.com",
           "industry": "Telecom Services",
-          "market_cap": 144093167616.0,
-          "pe": 11.438502,
-          "forward_pe": 8.240234,
+          "market_cap": 147057213440.0,
+          "pe": 11.673797,
+          "forward_pe": 8.4097395,
           "revenue_growth": 0.053,
           "earnings_growth": -0.904,
           "profit_margin": 0.101940006,
-          "dividend_yield": 5.189340813464236
+          "dividend_yield": 5.084745762711865
         },
         {
           "symbol": "HPE",
@@ -96,13 +96,13 @@
           "sector": "Technology",
           "website": "https://www.hpe.com",
           "industry": "Communication Equipment",
-          "market_cap": 70488383488.0,
-          "pe": 27.371132,
-          "forward_pe": 11.2135315,
+          "market_cap": 66492715008.0,
+          "pe": 25.819588,
+          "forward_pe": 10.577888,
           "revenue_growth": 0.337,
           "earnings_growth": 4.102,
           "profit_margin": 0.06666,
-          "dividend_yield": 1.0734463276836157
+          "dividend_yield": 1.1379516869634656
         },
         {
           "symbol": "QCOM",
@@ -112,13 +112,13 @@
           "sector": "Technology",
           "website": "https://www.qualcomm.com",
           "industry": "Semiconductors",
-          "market_cap": 175584837632.0,
-          "pe": 19.031248,
-          "forward_pe": 16.184229,
+          "market_cap": 184939118592.0,
+          "pe": 13.637009,
+          "forward_pe": 13.478304,
           "revenue_growth": -0.04,
           "earnings_growth": -0.23,
           "profit_margin": 0.21013,
-          "dividend_yield": 2.238034421942468
+          "dividend_yield": 2.124833997343958
         },
         {
           "symbol": "CMCSA",
@@ -128,13 +128,13 @@
           "sector": "Communication Services",
           "website": "https://corporate.comcast.com",
           "industry": "Telecom Services",
-          "market_cap": 84052320256.0,
-          "pe": 7.490506,
-          "forward_pe": 6.7208614,
+          "market_cap": 88242503680.0,
+          "pe": 7.863924,
+          "forward_pe": 7.055911,
           "revenue_growth": -0.061,
           "earnings_growth": 0.078,
           "profit_margin": 0.092,
-          "dividend_yield": 5.576679340937895
+          "dividend_yield": 5.311871227364185
         },
         {
           "symbol": "SHEL.L",
@@ -144,13 +144,13 @@
           "sector": "Energy",
           "website": "https://www.shell.com",
           "industry": "Oil & Gas Integrated",
-          "market_cap": 218881392640.0,
-          "pe": 8.855504,
-          "forward_pe": 8.79311,
+          "market_cap": 215464771584.0,
+          "pe": 8.84186,
+          "forward_pe": 8.658743,
           "revenue_growth": 0.362,
           "earnings_growth": 1.367,
           "profit_margin": 0.1018,
-          "dividend_yield": 0.030303030303030304
+          "dividend_yield": 0.03051025775907417
         },
         {
           "symbol": "PFE",
@@ -160,13 +160,13 @@
           "sector": "Healthcare",
           "website": "https://www.pfizer.com",
           "industry": "Drug Manufacturers - General",
-          "market_cap": 170995613696.0,
-          "pe": 42.857143,
-          "forward_pe": 10.312645,
+          "market_cap": 175498510336.0,
+          "pe": 43.985718,
+          "forward_pe": 10.584211,
           "revenue_growth": -0.004,
           "earnings_growth": -0.097,
           "profit_margin": 0.06339,
-          "dividend_yield": 5.733333333333333
+          "dividend_yield": 5.586229295225722
         }
       ],
       "sector_weights": {
