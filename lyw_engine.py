@@ -167,6 +167,176 @@ def build_lyw_data() -> dict:
     spy_val_gbp = round(spy_shares * spy_price / fx_rate, 2)
     spy_return_pct = round((spy_val_gbp / 1000.0 - 1.0) * 100.0, 2)
 
+    # Real Account details across both Trading 212 tranches:
+    real_account = {
+        "holdingYear": 2026,
+        "ticker": "100% CASH",
+        "name": "Trading 212 ISA (SanDisk Liquidated)",
+        "broker": "Trading 212",
+        "totalCapitalGbp": 1831.78,
+        "netInvestedGbp": 1827.04,
+        "totalShares": 1.79031071,
+        "blendedCostBasisUsd": 1360.46,
+        "exitPriceUsd": 998.05,
+        "exitDate": "5 Nov 2026, 09:03 UTC",
+        "realisedCashGbp": 1323.36,
+        "realisedLossGbp": -503.68,
+        "realisedReturnPct": -27.50,
+        "statusLabel": "STOPPED OUT · 100% CASH IN PIE",
+        "tranches": [
+            {
+                "id": 1,
+                "label": "Tranche 1 (Initial Entry)",
+                "date": "12 Oct 2026, 11:47 BST",
+                "shares": 0.8481779,
+                "priceUsd": 1557.71,
+                "fxRate": 1.3232,
+                "capitalGbp": 1000.0,
+                "netInvestedGbp": 998.50,
+                "feeGbp": 1.50,
+            },
+            {
+                "id": 2,
+                "label": "Tranche 2 (Top-up)",
+                "date": "2 Nov 2026, 08:26 GMT",
+                "orderId": 59802688463,
+                "fillId": 59802688467,
+                "shares": 0.94213281,
+                "priceUsd": 1182.88,
+                "fxRate": 1.3418,
+                "capitalGbp": 831.78,
+                "netInvestedGbp": 830.53,
+                "feeGbp": 1.25,
+            },
+        ],
+    }
+
+    # Historical Daily Benchmark Chart Series (12 Oct 2026 to 5 Nov 2026)
+    chart_dates = ["2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-19", "2026-10-20", "2026-10-21", "2026-10-22", "2026-10-23", "2026-10-26", "2026-10-27", "2026-10-28", "2026-10-29", "2026-10-30", "2026-11-02", "2026-11-03", "2026-11-04", "2026-11-05"]
+    sndk_hist = [1487.33, 1482.33, 1403.34, 1394.83, 1299.30, 1371.12, 1365.38, 1378.22, 1260.93, 1238.03, 1255.58, 1304.84, 1404.77, 1330.05, 1150.89, 1075.08, 1126.52, 1037.40, 998.05]
+    fx_hist = [1.3242, 1.3210, 1.3257, 1.3230, 1.3273, 1.3336, 1.3308, 1.3373, 1.3396, 1.3404, 1.3378, 1.3345, 1.3306, 1.3328, 1.3379, 1.3386, 1.3410, 1.3434, 1.3482]
+    vuag_hist = [114.36, 113.76, 113.92, 112.80, 111.98, 112.28, 111.70, 111.96, 110.92, 110.82, 111.32, 112.36, 112.52, 111.74, 109.78, 110.10, 109.20, 109.80, vuag_price]
+    vukg_hist = [57.39, 57.37, 57.84, 58.42, 58.64, 58.02, 57.86, 57.94, 57.82, 57.61, 58.02, 57.62, 57.66, 57.78, 57.78, 58.01, 57.37, 58.10, vukg_price]
+    vall_hist = [3.774, 3.754, 3.752, 3.719, 3.699, 3.704, 3.687, 3.6985, 3.655, 3.6525, 3.6695, 3.7025, 3.708, 3.690, 3.628, 3.6505, 3.621, 3.638, vall_price]
+    spy_hist = [778.10, 778.01, 769.60, 771.79, 763.25, 766.48, 769.05, 773.09, 763.96, 759.97, 765.37, 769.66, 772.31, 769.36, 755.72, 752.10, 754.35, 766.81, spy_price]
+
+    lyw_real, lyw_pct, lyw_norm = [], [], []
+    vuag_real, vuag_pct, vuag_norm = [], [], []
+    vukg_real, vukg_pct, vukg_norm = [], [], []
+    vall_real, vall_pct, vall_norm = [], [], []
+    spy_real, spy_pct, spy_norm = [], [], []
+
+    for idx, d in enumerate(chart_dates):
+        fx = fx_hist[idx]
+        sp = sndk_hist[idx]
+        vp = vuag_hist[idx]
+        kp = vukg_hist[idx]
+        ap = vall_hist[idx]
+        spp = spy_hist[idx]
+
+        if d < "2026-11-02":
+            strat_r = round((0.8481779 * sp) / fx, 2)
+            strat_p = round((strat_r / 1000.0 - 1.0) * 100.0, 2)
+            strat_n = strat_r
+            vr = round((1000.0 / 114.36) * vp, 2)
+            kr = round((1000.0 / 57.39) * kp, 2)
+            ar = round((1000.0 / 3.774) * ap, 2)
+            sr = round((1000.0 * 1.3232 / 778.10) * spp / fx, 2)
+            vpct = round((vr / 1000.0 - 1.0) * 100.0, 2)
+            kpct = round((kr / 1000.0 - 1.0) * 100.0, 2)
+            apct = round((ar / 1000.0 - 1.0) * 100.0, 2)
+            spct = round((sr / 1000.0 - 1.0) * 100.0, 2)
+            vn, kn, an, sn = vr, kr, ar, sr
+        elif d < "2026-11-05":
+            strat_r = round((1.79031071 * sp) / fx, 2)
+            strat_p = round((strat_r / 1831.78 - 1.0) * 100.0, 2)
+            strat_n = round((0.8481779 * sp) / fx, 2)
+            vr = round(((1000.0 / 114.36) + (831.78 / 110.10)) * vp, 2)
+            kr = round(((1000.0 / 57.39) + (831.78 / 58.01)) * kp, 2)
+            ar = round(((1000.0 / 3.774) + (831.78 / 3.6505)) * ap, 2)
+            sr = round(((1000.0 * 1.3232 / 778.10) + (831.78 * 1.3418 / 752.10)) * spp / fx, 2)
+            vpct = round((vr / 1831.78 - 1.0) * 100.0, 2)
+            kpct = round((kr / 1831.78 - 1.0) * 100.0, 2)
+            apct = round((ar / 1831.78 - 1.0) * 100.0, 2)
+            spct = round((sr / 1831.78 - 1.0) * 100.0, 2)
+            vn = round((1000.0 / 114.36) * vp, 2)
+            kn = round((1000.0 / 57.39) * kp, 2)
+            an = round((1000.0 / 3.774) * ap, 2)
+            sn = round((1000.0 * 1.3232 / 778.10) * spp / fx, 2)
+        else:
+            strat_r = 1323.36
+            strat_p = -27.50
+            strat_n = 626.97
+            vr = round(((1000.0 / 114.36) + (831.78 / 110.10)) * vp, 2)
+            kr = round(((1000.0 / 57.39) + (831.78 / 58.01)) * kp, 2)
+            ar = round(((1000.0 / 3.774) + (831.78 / 3.6505)) * ap, 2)
+            sr = round(((1000.0 * 1.3232 / 778.10) + (831.78 * 1.3418 / 752.10)) * spp / fx, 2)
+            vpct = round((vr / 1831.78 - 1.0) * 100.0, 2)
+            kpct = round((kr / 1831.78 - 1.0) * 100.0, 2)
+            apct = round((ar / 1831.78 - 1.0) * 100.0, 2)
+            spct = round((sr / 1831.78 - 1.0) * 100.0, 2)
+            vn = round((1000.0 / 114.36) * vp, 2)
+            kn = round((1000.0 / 57.39) * kp, 2)
+            an = round((1000.0 / 3.774) * ap, 2)
+            sn = round((1000.0 * 1.3232 / 778.10) * spp / fx, 2)
+
+        lyw_real.append(strat_r); lyw_pct.append(strat_p); lyw_norm.append(strat_n)
+        vuag_real.append(vr); vuag_pct.append(vpct); vuag_norm.append(vn)
+        vukg_real.append(kr); vukg_pct.append(kpct); vukg_norm.append(kn)
+        vall_real.append(ar); vall_pct.append(apct); vall_norm.append(an)
+        spy_real.append(sr); spy_pct.append(spct); spy_norm.append(sn)
+
+    benchmark_chart = {
+        "dates": chart_dates,
+        "series": [
+            {
+                "id": "LYW",
+                "ticker": "LYW (SNDK → Cash)",
+                "name": "Last Year's Winner",
+                "color": "#9f4735",
+                "realValues": lyw_real,
+                "pctValues": lyw_pct,
+                "normValues": lyw_norm,
+            },
+            {
+                "id": "VUAG",
+                "ticker": "VUAG.L",
+                "name": "Vanguard S&P 500 (VUAG)",
+                "color": "#265944",
+                "realValues": vuag_real,
+                "pctValues": vuag_pct,
+                "normValues": vuag_norm,
+            },
+            {
+                "id": "VUKG",
+                "ticker": "VUKG.L",
+                "name": "Vanguard FTSE 100 (VUKG)",
+                "color": "#4f772d",
+                "realValues": vukg_real,
+                "pctValues": vukg_pct,
+                "normValues": vukg_norm,
+            },
+            {
+                "id": "VALL",
+                "ticker": "VALL.L",
+                "name": "Vanguard FTSE Global All-Cap (VALL)",
+                "color": "#1d3557",
+                "realValues": vall_real,
+                "pctValues": vall_pct,
+                "normValues": vall_norm,
+            },
+            {
+                "id": "SPY",
+                "ticker": "SPY",
+                "name": "SPDR S&P 500 ETF (USD)",
+                "color": "#838880",
+                "realValues": spy_real,
+                "pctValues": spy_pct,
+                "normValues": spy_norm,
+            },
+        ],
+    }
+
     benchmarks = [
         {
             "id": "VUAG",
@@ -182,6 +352,10 @@ def build_lyw_data() -> dict:
             "valuationGbp": vuag_val,
             "netReturnPct": vuag_ret,
             "diffVsStrategyGbp": round(val_gbp - vuag_val, 2),
+            "realInvestedGbp": 1831.78,
+            "realValuationGbp": vuag_real[-1],
+            "realReturnPct": vuag_pct[-1],
+            "realDiffVsStrategyGbp": round(vuag_real[-1] - 1323.36, 2),
         },
         {
             "id": "VUKG",
@@ -197,6 +371,10 @@ def build_lyw_data() -> dict:
             "valuationGbp": vukg_val,
             "netReturnPct": vukg_ret,
             "diffVsStrategyGbp": round(val_gbp - vukg_val, 2),
+            "realInvestedGbp": 1831.78,
+            "realValuationGbp": vukg_real[-1],
+            "realReturnPct": vukg_pct[-1],
+            "realDiffVsStrategyGbp": round(vukg_real[-1] - 1323.36, 2),
         },
         {
             "id": "VALL",
@@ -212,6 +390,10 @@ def build_lyw_data() -> dict:
             "valuationGbp": vall_val,
             "netReturnPct": vall_ret,
             "diffVsStrategyGbp": round(val_gbp - vall_val, 2),
+            "realInvestedGbp": 1831.78,
+            "realValuationGbp": vall_real[-1],
+            "realReturnPct": vall_pct[-1],
+            "realDiffVsStrategyGbp": round(vall_real[-1] - 1323.36, 2),
         },
         {
             "id": "SPY",
@@ -227,6 +409,10 @@ def build_lyw_data() -> dict:
             "valuationGbp": spy_val_gbp,
             "netReturnPct": spy_return_pct,
             "diffVsStrategyGbp": round(val_gbp - spy_val_gbp, 2),
+            "realInvestedGbp": 1831.78,
+            "realValuationGbp": spy_real[-1],
+            "realReturnPct": spy_pct[-1],
+            "realDiffVsStrategyGbp": round(spy_real[-1] - 1323.36, 2),
         },
     ]
 
@@ -431,7 +617,9 @@ def build_lyw_data() -> dict:
             "asof": date.today().isoformat(),
         },
         "livePosition": live_position,
+        "realAccount": real_account,
         "benchmarks": benchmarks,
+        "benchmarkChart": benchmark_chart,
         "race2027": contenders,
         "contendersChart": chart_data,
         "stats": stats,

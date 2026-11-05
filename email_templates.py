@@ -337,20 +337,26 @@ def build_lyw_email(
     if is_stopped:
         plain_lines = [
             f"Last Year's Winner · Daily Monitor",
-            f"Personal rule: {status_label}",
+            f"Strategy Status: STOPPED OUT · 100% IN CASH",
             "",
-            f"Holding now: 100% Cash (SNDK Stopped Out).",
-            f"Liquidated: 5 Nov 2026 at ${cur_price:,.2f} OTC on Trading 212.",
-            f"Realised proceeds: £1,323.36 sitting in pie cash.",
+            f"Execution details: Sold all 1.79031071 shares of SanDisk (SNDK) across 2 tranches at $998.05 OTC.",
+            f"Tranche 1: 12 Oct 2026, 0.8482 shs @ $1,557.71 (£1,000.00 invested).",
+            f"Tranche 2: 2 Nov 2026, 0.9421 shs @ $1,182.88 (£831.78 invested).",
+            f"Total invested capital: £1,831.78 (blended basis $1,360.46).",
+            f"Net cash realised: £1,323.36 (sitting in Trading 212 pie cash).",
+            f"Realised loss: -£503.68 (-27.50% on capital).",
             "",
-            "Strategy status:",
-            f"Fixed 35% entry stop was ${stop_price:,.2f}. Position sold at ${cur_price:,.2f}.",
-            f"Strategy sits in 100% cash until the January {today.year + 1} annual rotation.",
+            "Passive Vanguard Benchmarks:",
+            "Real Account (£1,831.78 invested across both dates):",
+            "• VUAG (S&P 500 Acc): £1,800.07 (-1.73%) · vs Strategy: +£476.71",
+            "• VUKG (FTSE 100 Acc): £1,871.17 (+2.15%) · vs Strategy: +£547.81",
+            "• VALL (Global All-Cap Acc): £1,801.77 (-1.64%) · vs Strategy: +£478.41",
             "",
-            "Passive Vanguard Benchmarks (£1,000 invested 12 Oct 2026):",
-            "• VUAG (S&P 500 Acc): £965.20 (-3.48%) · vs Strategy: +£338.23",
-            "• VUKG (FTSE 100 Acc): £1,026.31 (+2.63%) · vs Strategy: +£399.34",
-            "• VALL (Global All-Cap Acc): £968.60 (-3.14%) · vs Strategy: +£341.63",
+            "Normalised Initial Allocation Leg (£1,000 base):",
+            "• Strategy: £626.97 (-37.30%)",
+            "• VUAG: £965.72 (-3.43%) · vs Strategy: +£338.75",
+            "• VUKG: £1,026.49 (+2.65%) · vs Strategy: +£399.52",
+            "• VALL: £968.73 (-3.13%) · vs Strategy: +£341.76",
             "",
             f"2027 Strategy Countdown:",
             f"{days_to_year_end} calendar days until the {today.year} year-end close.",
@@ -504,32 +510,32 @@ def build_lyw_email(
 
               <!-- Vanguard Passive Benchmarks Table -->
               <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#475569;margin-bottom:8px;">
-                Passive Vanguard Benchmarks (£1,000 invested 12 Oct 2026)
+                Passive Vanguard Benchmarks (Real £1,831.78 Account vs Strategy)
               </div>
               <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;margin-bottom:20px;font-size:12.5px;">
                 <tr style="background-color:#f8fafc;border-bottom:1px solid #e2e8f0;">
                   <th align="left" style="padding:8px 12px;font-size:11px;color:#64748b;text-transform:uppercase;">Tracker</th>
-                  <th align="right" style="padding:8px 12px;font-size:11px;color:#64748b;text-transform:uppercase;">Valuation</th>
+                  <th align="right" style="padding:8px 12px;font-size:11px;color:#64748b;text-transform:uppercase;">Real Value</th>
                   <th align="right" style="padding:8px 12px;font-size:11px;color:#64748b;text-transform:uppercase;">Return</th>
                   <th align="right" style="padding:8px 12px;font-size:11px;color:#64748b;text-transform:uppercase;">vs Strategy</th>
                 </tr>
                 <tr style="border-bottom:1px solid #e2e8f0;">
                   <td style="padding:8px 12px;font-weight:600;">VUAG (S&amp;P 500 Acc)</td>
-                  <td style="padding:8px 12px;text-align:right;font-weight:700;">£965.20</td>
-                  <td style="padding:8px 12px;text-align:right;color:#dc2626;font-weight:700;">-3.48%</td>
-                  <td style="padding:8px 12px;text-align:right;color:#059669;font-weight:700;">+£338.23</td>
+                  <td style="padding:8px 12px;text-align:right;font-weight:700;">£1,800.07</td>
+                  <td style="padding:8px 12px;text-align:right;color:#dc2626;font-weight:700;">-1.73%</td>
+                  <td style="padding:8px 12px;text-align:right;color:#059669;font-weight:700;">+£476.71</td>
                 </tr>
                 <tr style="border-bottom:1px solid #e2e8f0;">
                   <td style="padding:8px 12px;font-weight:600;">VUKG (FTSE 100 Acc)</td>
-                  <td style="padding:8px 12px;text-align:right;font-weight:700;">£1,026.31</td>
-                  <td style="padding:8px 12px;text-align:right;color:#059669;font-weight:700;">+2.63%</td>
-                  <td style="padding:8px 12px;text-align:right;color:#059669;font-weight:700;">+£399.34</td>
+                  <td style="padding:8px 12px;text-align:right;font-weight:700;">£1,871.17</td>
+                  <td style="padding:8px 12px;text-align:right;color:#059669;font-weight:700;">+2.15%</td>
+                  <td style="padding:8px 12px;text-align:right;color:#059669;font-weight:700;">+£547.81</td>
                 </tr>
                 <tr style="border-bottom:1px solid #e2e8f0;">
                   <td style="padding:8px 12px;font-weight:600;">VALL (Global All-Cap Acc)</td>
-                  <td style="padding:8px 12px;text-align:right;font-weight:700;">£968.60</td>
-                  <td style="padding:8px 12px;text-align:right;color:#dc2626;font-weight:700;">-3.14%</td>
-                  <td style="padding:8px 12px;text-align:right;color:#059669;font-weight:700;">+£341.63</td>
+                  <td style="padding:8px 12px;text-align:right;font-weight:700;">£1,801.77</td>
+                  <td style="padding:8px 12px;text-align:right;color:#dc2626;font-weight:700;">-1.64%</td>
+                  <td style="padding:8px 12px;text-align:right;color:#059669;font-weight:700;">+£478.41</td>
                 </tr>
               </table>
 

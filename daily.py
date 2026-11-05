@@ -282,9 +282,10 @@ def main():
             lyw_block = (
                 f"<b>🎯 LAST YEAR'S WINNER (S&amp;P 500 Momentum)</b>\n"
                 f"• Active Status: <b>STOPPED OUT · 100% CASH</b>\n"
-                f"• Liquidated: <b>SNDK sold at ${lp.get('exitPrice', 998.05):.2f} OTC</b> (breached ${lp.get('stopLossPrice', 1012.51):.2f} stop)\n"
-                f"• Realised Cash: <b>£1,323.36</b> in Trading 212 pie cash until Jan 2027\n"
-                f"• Benchmarks vs £1k: <b>VUAG</b> £965.20 (-3.5%) · <b>VUKG</b> £1,026.31 (+2.6%) · <b>VALL</b> £968.60 (-3.1%)\n"
+                f"• Liquidated: <b>SNDK sold at ${lp.get('exitPrice', 998.05):.2f} OTC</b> across 2 tranches (breached ${lp.get('stopLossPrice', 1012.51):.2f} stop)\n"
+                f"• Real Portfolio Cash: <b>£1,323.36</b> in T212 pie cash (-£503.68 on £1,831.78 capital)\n"
+                f"• Benchmarks vs Real £1.83k: <b>VUAG</b> £1,800.07 (-1.7%) · <b>VUKG</b> £1,871.17 (+2.1%) · <b>VALL</b> £1,801.77 (-1.6%)\n"
+                f"• Benchmarks vs Norm £1k: <b>VUAG</b> £965.72 (-3.4%) · <b>VUKG</b> £1,026.49 (+2.6%) · <b>VALL</b> £968.73 (-3.1%)\n"
                 f"• 2027 Leader: <b>{leader.get('ticker', 'MRNA')}</b> ({leader.get('ytd', 0):+.1f}% YTD)\n"
                 f"• 2027 Contenders: {contenders_str}\n\n"
             )
