@@ -1,5 +1,5 @@
 {
-  "asof": "2026-11-02",
+  "asof": "2026-11-03",
   "startDate": "2026-01-02",
   "dates": [
     "2026-01-02",
@@ -211,7 +211,8 @@
     "2026-10-28",
     "2026-10-29",
     "2026-10-30",
-    "2026-11-02"
+    "2026-11-02",
+    "2026-11-03"
   ],
   "series": [
     {
@@ -220,7 +221,7 @@
       "rank": 1,
       "color": "#2563eb",
       "logo": "assets/company-logos/MRNA.png",
-      "currentYtd": 615.6,
+      "currentYtd": 640.2,
       "peakYtd": 696.5,
       "peakDate": "2026-10-21",
       "isHolding": false,
@@ -435,7 +436,8 @@
         594.0,
         621.8,
         618.5,
-        615.6
+        615.6,
+        640.2
       ]
     },
     {
@@ -444,7 +446,7 @@
       "rank": 2,
       "color": "#d97706",
       "logo": "assets/company-logos/SNDK.png",
-      "currentYtd": 290.6,
+      "currentYtd": 309.3,
       "peakYtd": 748.4,
       "peakDate": "2026-06-25",
       "isHolding": true,
@@ -659,7 +661,8 @@
         410.4,
         383.2,
         318.1,
-        290.6
+        290.6,
+        309.3
       ]
     },
     {
@@ -668,7 +671,7 @@
       "rank": 3,
       "color": "#0d9488",
       "logo": "assets/company-logos/DELL.png",
-      "currentYtd": 210.6,
+      "currentYtd": 222.9,
       "peakYtd": 364.6,
       "peakDate": "2026-09-17",
       "isHolding": false,
@@ -883,7 +886,8 @@
         290.5,
         276.0,
         235.5,
-        210.6
+        210.6,
+        222.9
       ]
     },
     {
@@ -892,7 +896,7 @@
       "rank": 4,
       "color": "#e11d48",
       "logo": "assets/company-logos/MU.png",
-      "currentYtd": 164.5,
+      "currentYtd": 171.3,
       "peakYtd": 284.9,
       "peakDate": "2026-06-25",
       "isHolding": false,
@@ -1107,7 +1111,8 @@
         211.9,
         196.4,
         180.7,
-        164.5
+        164.5,
+        171.3
       ]
     },
     {
@@ -1116,7 +1121,7 @@
       "rank": 5,
       "color": "#7c3aed",
       "logo": "assets/company-logos/MPC.png",
-      "currentYtd": 163.6,
+      "currentYtd": 161.8,
       "peakYtd": 197.1,
       "peakDate": "2026-10-14",
       "isHolding": false,
@@ -1331,7 +1336,8 @@
         170.0,
         164.9,
         172.4,
-        163.6
+        163.6,
+        161.8
       ]
     },
     {
@@ -1340,7 +1346,7 @@
       "rank": null,
       "color": "#64748b",
       "logo": null,
-      "currentYtd": 10.9,
+      "currentYtd": 11.3,
       "peakYtd": 14.9,
       "peakDate": "2026-10-06",
       "isHolding": false,
@@ -1555,7 +1561,8 @@
         13.9,
         13.5,
         11.5,
-        10.9
+        10.9,
+        11.3
       ]
     }
   ]
