@@ -477,6 +477,13 @@ STRAT_BAR_HTML = """
           <span class="strat-sub">Blended Compounding Engine</span>
         </span>
       </button>
+      <a class="strat-tab" href="./pullback.html" style="text-decoration:none">
+        <span class="strat-icon">🎯</span>
+        <span class="strat-meta">
+          <span class="strat-title">Simple Pullback 1W</span>
+          <span class="strat-sub">54-Ticker ETF &amp; Stock Dip Scanner</span>
+        </span>
+      </a>
     </div>
   </div>
 </div>
